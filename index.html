@@ -1,287 +1,561 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>المكتبة الشاملة لمؤلفات المرجع المهندس الصرخي الحسني</title>
 
-<title>المكتبة الشاملة لمؤلفات المرجع المهندس الصرخي الحسني</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Tahoma, Arial, sans-serif;
+    }
 
-<style>
-body {
-  margin:0;
-  font-family:Tahoma;
-  background:#e9e4db;
-}
+    body {
+      background: #e9e4db;
+      color: #3d2512;
+    }
 
-header {
-  background:linear-gradient(135deg,#6e451f,#8b5a2b);
-  color:#fff;
-  text-align:center;
-  padding:25px;
-}
-  
-header h1 {
-  margin:0;
-  font-size:28px;
-}
+    header {
+      background: linear-gradient(135deg, #6e451f, #8b5a2b);
+      color: #fff;
+      text-align: center;
+      padding: 24px 15px;
+    }
 
-header p {
-  margin-top:8px;
-}
+    header h1 {
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
 
-.container {
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
-}
+    header p {
+      font-size: 18px;
+    }
 
-.categories {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:15px;
-}
+    .search-box {
+      max-width: 700px;
+      margin: 25px auto 20px;
+      padding: 0 15px;
+    }
 
-.category {
-  background:#fff;
-  padding:20px;
-  text-align:center;
-  border-radius:12px;
-  cursor:pointer;
-  border:2px solid #d6b187;
-}
+    .search-box input {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #b58345;
+      border-radius: 18px;
+      font-size: 18px;
+      outline: none;
+      background: #f8f5ef;
+      color: #5a3818;
+    }
 
-.category:hover {
-  background:#f3e9dc;
-}
+    .container {
+      max-width: 1250px;
+      margin: auto;
+      padding: 0 20px 40px;
+    }
 
-.books {
-  display:none;
-}
+    .section-title {
+      font-size: 30px;
+      margin: 20px 0;
+      color: #5a3112;
+      text-align: center;
+    }
 
-.book {
-  background:#fff;
-  border-radius:12px;
-  padding:15px;
-  margin-bottom:15px;
-  text-align:center;
-}
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-bottom: 35px;
+    }
 
-.book img {
-  width:150px;
-  height:220px;
-  object-fit:cover;
-  border-radius:8px;
-}
+    .category-card {
+      background: #fff;
+      border: 2px solid #d6b187;
+      border-radius: 16px;
+      padding: 24px 18px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.25s;
+    }
 
-.btns a {
-  display:inline-block;
-  margin:5px;
-  padding:8px 12px;
-  border-radius:8px;
-  text-decoration:none;
-  color:white;
-}
+    .category-card:hover {
+      background: #f3e9dc;
+      transform: translateY(-4px);
+    }
 
-.read { background:#8b5a2b; }
-.download { background:#5a3818; }
+    .category-card h3 {
+      font-size: 24px;
+      color: #4a2b11;
+      line-height: 1.6;
+    }
 
-.back {
-  margin-bottom:15px;
-  padding:10px;
-  background:#8b5a2b;
-  color:#fff;
-  border:none;
-  cursor:pointer;
-  border-radius:8px;
-}
-</style>
+    .books-section {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .books-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .back-btn {
+      background: #8b5a2b;
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .back-btn:hover {
+      background: #6f451f;
+    }
+
+    .empty-msg {
+      background: #f7f2ea;
+      border: 1px dashed #c9a16d;
+      border-radius: 16px;
+      padding: 25px;
+      text-align: center;
+      font-size: 22px;
+      color: #7a5733;
+    }
+
+    .home-block {
+      margin: 35px 0;
+    }
+
+    .home-title {
+      text-align: center;
+      color: #5a3112;
+      font-size: 28px;
+      margin-bottom: 18px;
+    }
+
+    .wood-shelf {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      padding: 20px 18px 28px;
+      background: linear-gradient(180deg, #8b5a2b, #6e451f);
+      border-radius: 16px;
+      position: relative;
+      box-shadow: inset 0 2px 8px rgba(255,255,255,0.08), 0 6px 18px rgba(0,0,0,0.12);
+    }
+
+    .wood-shelf::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 14px;
+      background: #5a3818;
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    }
+
+    .book-card {
+      width: 170px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 8px;
+    }
+
+    .book-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #eee3d4;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+      transition: 0.25s;
+      display: block;
+    }
+
+    .book-card img:hover {
+      transform: translateY(-8px);
+    }
+
+    .book-card h4 {
+      font-size: 17px;
+      color: #fff;
+      line-height: 1.7;
+      margin: 10px 0 8px;
+      min-height: 58px;
+    }
+
+    .book-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .book-buttons a,
+    .soon-badge {
+      display: inline-block;
+      text-decoration: none;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .read-btn {
+      background: #3f6d3f;
+    }
+
+    .download-btn {
+      background: #444;
+    }
+
+    .soon-badge {
+      background: #a96d2b;
+    }
+
+    .banner-shelf {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: center;
+      padding: 22px 18px 30px;
+      background: linear-gradient(180deg, #8b5a2b, #6e451f);
+      border-radius: 16px;
+      position: relative;
+      box-shadow: inset 0 2px 8px rgba(255,255,255,0.08), 0 6px 18px rgba(0,0,0,0.12);
+      margin-top: 25px;
+    }
+
+    .banner-shelf::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 14px;
+      background: #5a3818;
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    }
+
+    .banner-book {
+      width: 190px;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .banner-book img {
+      width: 100%;
+      height: 270px;
+      object-fit: cover;
+      border-radius: 10px;
+      background: #eee3d4;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+      transition: 0.25s;
+      display: block;
+    }
+
+    .banner-book img:hover {
+      transform: translateY(-8px);
+    }
+
+    footer {
+      text-align: center;
+      background: #6e451f;
+      color: #fff;
+      padding: 18px;
+      font-size: 18px;
+      margin-top: 45px;
+    }
+
+    @media (max-width: 700px) {
+      header h1 {
+        font-size: 25px;
+      }
+
+      .section-title,
+      .home-title {
+        font-size: 24px;
+      }
+
+      .book-card,
+      .banner-book {
+        width: 140px;
+      }
+
+      .book-card img {
+        height: 210px;
+      }
+
+      .banner-book img {
+        height: 220px;
+      }
+
+      .book-card h4 {
+        font-size: 15px;
+        min-height: 50px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
-<h1>المكتبة الشاملة لمؤلفات المرجع المهندس الصرخي الحسني</h1>
-<p>مكتبة إلكترونية شاملة لجميع المؤلفات والبحوث</p>
-</header>
+  <header>
+    <h1>المكتبة الشاملة لمؤلفات المرجع المهندس الصرخي الحسني</h1>
+    <p>مكتبة إلكترونية شاملة لجميع المؤلفات والبحوث</p>
+  </header>
 
-<div class="container">
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="ابحث عن قسم..." onkeyup="filterCategories()">
+  </div>
 
-<div id="categories" class="categories"></div>
+  <div class="container">
 
-<div id="books" class="books">
-<button class="back" onclick="goBack()">رجوع</button>
-<h2 id="title"></h2>
-<div id="list"></div>
-</div>
+    <section id="librarySection">
+      <div class="categories" id="categoriesContainer"></div>
 
-</div>
+      <div class="home-block">
+        <h2 class="home-title">صدر حديثًا</h2>
+        <div class="wood-shelf" id="latestBooks"></div>
+      </div>
 
-<script>
+      <div class="home-block">
+        <h2 class="home-title">سيصدر قريبًا</h2>
+        <div class="wood-shelf" id="comingBooks"></div>
+      </div>
 
-const placeholder = "https://via.placeholder.com/200x300?text=كتاب";
+      <div class="home-block">
+        <div class="banner-shelf" id="bannerBooks"></div>
+      </div>
+    </section>
 
-const library = [
-  {
-    name: "البحوث الفلسفية",
-    books: []
-  },
-  {
-    name: "البحوث الأصولية",
-    books: [
+    <section class="books-section" id="booksSection">
+      <div class="books-header">
+        <button class="back-btn" onclick="goBack()">رجوع إلى الأقسام</button>
+        <h2 class="section-title" id="booksTitle"></h2>
+      </div>
+      <div id="booksContent"></div>
+    </section>
+
+  </div>
+
+  <footer>
+    جميع الحقوق محفوظة © المكتبة الشاملة لمؤلفات المرجع المهندس الصرخي الحسني
+  </footer>
+
+  <script>
+    const placeholder = "https://via.placeholder.com/300x420?text=%D9%83%D8%AA%D8%A7%D8%A8";
+
+    const library = [
+      {
+        name: "البحوث الفلسفية",
+        books: []
+      },
+      {
+        name: "البحوث الأصولية",
+        books: [
+          {
+            title: "الفكر المتين – البراءة والتخيير – الجزء الأول",
+            image: "book1.jpg",
+            pdf: "book1.pdf"
+          }
+        ]
+      },
+      {
+        name: "البحوث الفقهية",
+        books: []
+      },
+      {
+        name: "الرسالة العملية",
+        books: []
+      },
+      {
+        name: "بحوث المنطق وأصول الفقه",
+        books: []
+      },
+      {
+        name: "البحوث الأخلاقية",
+        books: []
+      },
+      {
+        name: "بحوث التفسير",
+        books: []
+      },
+      {
+        name: "البحوث العقائدية",
+        books: []
+      },
+      {
+        name: "البحوث التاريخية",
+        books: []
+      }
+    ];
+
+    const latestBooks = [
       {
         title: "الفكر المتين – البراءة والتخيير – الجزء الأول",
         image: "book1.jpg",
         pdf: "book1.pdf"
       }
-    ]
-  },
-  {
-    name: "البحوث الفقهية",
-    books: []
-  },
-  {
-    name: "الرسالة العملية",
-    books: []
-  },
-  {
-    name: "بحوث المنطق وأصول الفقه",
-    books: []
-  },
-  {
-    name: "البحوث الأخلاقية",
-    books: []
-  },
-  {
-    name: "بحوث التفسير",
-    books: []
-  },
-  {
-    name: "البحوث العقائدية",
-    books: []
-  },
-  {
-    name: "البحوث التاريخية",
-    books: []
-  }
-];
+    ];
 
-// عرض الأقسام
-const catDiv = document.getElementById("categories");
-const booksDiv = document.getElementById("books");
-const list = document.getElementById("list");
-const title = document.getElementById("title");
+    const comingBooks = [
+      {
+        title: "سيضاف قريبًا",
+        image: placeholder
+      },
+      {
+        title: "سيضاف قريبًا",
+        image: placeholder
+      },
+      {
+        title: "سيضاف قريبًا",
+        image: placeholder
+      }
+    ];
 
-library.forEach((c,i)=>{
-  catDiv.innerHTML += `<div class="category" onclick="openCat(${i})">${c.name}</div>`;
-});
+    const bannerBooks = [
+      {
+        title: "الفكر المتين – البراءة والتخيير – الجزء الأول",
+        image: "book1.jpg",
+        pdf: "book1.pdf"
+      },
+      {
+        title: "سيضاف قريبًا",
+        image: placeholder
+      },
+      {
+        title: "سيضاف قريبًا",
+        image: placeholder
+      }
+    ];
 
-// فتح القسم
-function openCat(i){
-  const c = library[i];
-  title.innerText = c.name;
+    const categoriesContainer = document.getElementById("categoriesContainer");
+    const librarySection = document.getElementById("librarySection");
+    const booksSection = document.getElementById("booksSection");
+    const booksTitle = document.getElementById("booksTitle");
+    const booksContent = document.getElementById("booksContent");
+    const searchInput = document.getElementById("searchInput");
 
-  catDiv.style.display="none";
-  booksDiv.style.display="block";
+    function renderCategories(data) {
+      categoriesContainer.innerHTML = "";
 
-  if(c.books.length===0){
-    list.innerHTML="لا توجد كتب";
-    return;
-  }
+      if (data.length === 0) {
+        categoriesContainer.innerHTML = `<div class="empty-msg">لا توجد نتائج مطابقة</div>`;
+        return;
+      }
 
-  list.innerHTML = c.books.map(b=>`
-    <div class="book">
-      <img src="${b.image || placeholder}" onerror="this.src='${placeholder}'">
-      <h3>${b.title}</h3>
+      data.forEach(category => {
+        const originalIndex = library.findIndex(item => item.name === category.name);
+        categoriesContainer.innerHTML += `
+          <div class="category-card" onclick="openCategory(${originalIndex})">
+            <h3>${category.name}</h3>
+          </div>
+        `;
+      });
+    }
 
-      <div class="btns">
-        <a class="read" href="${b.pdf}" target="_blank">📖 قراءة</a>
-        <a class="download" href="${b.pdf}" download>⬇ تحميل</a>
-      </div>
-    </div>
-  `).join("");
-}
+    function renderShelfBooks(elementId, books, type = "normal") {
+      const container = document.getElementById(elementId);
 
-// رجوع
-function goBack(){
-  booksDiv.style.display="none";
-  catDiv.style.display="grid";
-}
+      if (!books.length) {
+        container.innerHTML = `<div class="empty-msg" style="width:100%;">لا توجد كتب حالياً</div>`;
+        return;
+      }
 
-</script>
+      if (type === "coming") {
+        container.innerHTML = books.map(book => `
+          <div class="book-card">
+            <img src="${book.image || placeholder}" alt="${book.title}" onerror="this.src='${placeholder}'">
+            <h4>${book.title}</h4>
+            <span class="soon-badge">قريبًا</span>
+          </div>
+        `).join("");
+        return;
+      }
+
+      if (type === "banner") {
+        container.innerHTML = books.map(book => `
+          <div class="banner-book">
+            <a href="${book.pdf ? book.pdf : '#'}" ${book.pdf ? 'target="_blank"' : ''}>
+              <img src="${book.image || placeholder}" alt="${book.title}" onerror="this.src='${placeholder}'">
+            </a>
+          </div>
+        `).join("");
+        return;
+      }
+
+      container.innerHTML = books.map(book => `
+        <div class="book-card">
+          <img src="${book.image || placeholder}" alt="${book.title}" onerror="this.src='${placeholder}'">
+          <h4>${book.title}</h4>
+          <div class="book-buttons">
+            <a class="read-btn" href="${book.pdf}" target="_blank">📖 قراءة</a>
+            <a class="download-btn" href="${book.pdf}" download>⬇ تحميل</a>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function openCategory(index) {
+      const category = library[index];
+      booksTitle.textContent = category.name;
+
+      if (!category.books || category.books.length === 0) {
+        booksContent.innerHTML = `
+          <div class="empty-msg">لا توجد كتب مضافة حالياً داخل هذا القسم</div>
+        `;
+      } else {
+        booksContent.innerHTML = `
+          <div class="wood-shelf">
+            ${category.books.map(book => `
+              <div class="book-card">
+                <img src="${book.image || placeholder}" alt="${book.title}" onerror="this.src='${placeholder}'">
+                <h4>${book.title}</h4>
+                <div class="book-buttons">
+                  <a class="read-btn" href="${book.pdf}" target="_blank">📖 قراءة</a>
+                  <a class="download-btn" href="${book.pdf}" download>⬇ تحميل</a>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        `;
+      }
+
+      librarySection.style.display = "none";
+      booksSection.style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function goBack() {
+      booksSection.style.display = "none";
+      librarySection.style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function filterCategories() {
+      const value = searchInput.value.trim();
+      const filtered = library.filter(category => category.name.includes(value));
+      renderCategories(filtered);
+    }
+
+    renderCategories(library);
+    renderShelfBooks("latestBooks", latestBooks, "normal");
+    renderShelfBooks("comingBooks", comingBooks, "coming");
+    renderShelfBooks("bannerBooks", bannerBooks, "banner");
+  </script>
 
 </body>
 </html>
-
-<div class="shelf">
-  ${c.books.map(b=>`
-    <div class="book">
-      <img src="${b.image || placeholder}">
-      <p>${b.title}</p>
-
-      <div class="btns">
-        <a class="read" href="${b.pdf}" target="_blank">📖</a>
-        <a class="download" href="${b.pdf}" download>⬇</a>
-      </div>
-    </div>
-  `).join("")}
-</div>
-.shelf {
-  display:flex;
-  flex-wrap:wrap;
-  gap:20px;
-  padding:20px;
-  background:linear-gradient(#8b5a2b,#6e451f);
-  border-radius:10px;
-  position:relative;
-}
-
-/* خط الرف */
-.shelf::after {
-  content:"";
-  position:absolute;
-  bottom:0;
-  left:0;
-  width:100%;
-  height:12px;
-  background:#5a3818;
-  box-shadow:0 5px 10px rgba(0,0,0,0.4);
-}
-
-.book {
-  width:120px;
-  text-align:center;
-  position:relative;
-}
-
-.book img {
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  border-radius:4px;
-  box-shadow:0 5px 10px rgba(0,0,0,0.4);
-  transition:0.3s;
-}
-
-/* حركة عند المرور */
-.book img:hover {
-  transform:translateY(-8px);
-}
-
-.book p {
-  font-size:13px;
-  color:#fff;
-  margin-top:8px;
-}
-
-.btns a {
-  display:inline-block;
-  margin-top:5px;
-  font-size:12px;
-  padding:4px 6px;
-  border-radius:5px;
-  text-decoration:none;
-  color:#fff;
-}
-
-.read { background:#3e6b3e; }
-.download { background:#444; }
