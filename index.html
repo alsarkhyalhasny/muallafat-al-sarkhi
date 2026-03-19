@@ -1,173 +1,459 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>مؤلفات الصرخي الحسني</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مكتبة مؤلفات الصرخي الحسني</title>
 
-<style>
-body {
-    margin: 0;
-    font-family: Tahoma;
-    background: linear-gradient(#d9a766, #c58c4c);
-    direction: rtl;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-/* الهيدر */
-header {
-    background: #6b4226;
-    color: white;
-    padding: 15px;
-    font-size: 22px;
-    text-align: center;
-}
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      direction: rtl;
+      background: #cf9957;
+      color: #2f1b0f;
+    }
 
-/* القائمة الجانبية */
-.sidebar {
-    width: 250px;
-    float: left;
-    background: #e6d5c3;
-    padding: 20px;
-    min-height: 100vh;
-}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-.sidebar h3 {
-    color: #6b4226;
-}
+    /* الشريط العلوي */
+    .topbar {
+      background: #774824;
+      color: #fff;
+      text-align: center;
+      padding: 14px 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
 
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-}
+    /* الحاوية العامة */
+    .page {
+      display: flex;
+      min-height: calc(100vh - 52px);
+    }
 
-.sidebar li {
-    padding: 6px 0;
-}
+    /* القائمة الجانبية */
+    .sidebar {
+      width: 270px;
+      background: #ddd0c0;
+      padding: 28px 18px;
+      flex-shrink: 0;
+    }
 
-/* المحتوى */
-.main {
-    margin-left: 260px;
-    padding: 20px;
-}
+    .sidebar h2 {
+      margin: 0 0 20px;
+      font-size: 22px;
+      color: #6f4222;
+      text-align: center;
+    }
 
-/* الرف */
-.shelf {
-    background: #8b5a2b;
-    padding: 20px;
-    margin-bottom: 30px;
-    border-radius: 8px;
-}
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-/* الكتب */
-.books {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-}
+    .sidebar li {
+      margin: 10px 0;
+      font-size: 16px;
+      line-height: 1.6;
+    }
 
-/* الكتاب */
-.book {
-    width: 200px;
-    height: 300px;
-    background: white;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 6px 10px rgba(0,0,0,0.4);
-}
+    .sidebar li a {
+      display: block;
+      padding: 4px 0;
+    }
 
-.book img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
+    .sidebar li a:hover {
+      color: #8b2f1d;
+    }
 
-/* الحاوية */
-.book-container {
-    position: relative;
-}
+    /* المحتوى */
+    .content {
+      flex: 1;
+      padding: 18px;
+      background: #d19a58;
+    }
 
-/* مربع المعلومات */
-.book-info {
-    display: none;
-    position: absolute;
-    right: -260px;
-    top: 20px;
-    width: 250px;
-    background: #dfe5eb;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    text-align: right;
-}
+    /* الشريط الداخلي */
+    .content-header {
+      background: #9a642f;
+      border-radius: 0 0 8px 8px;
+      height: 56px;
+      margin-bottom: 24px;
+      position: relative;
+    }
 
-.book-container:hover .book-info {
-    display: block;
-}
-</style>
+    .content-header::before {
+      content: "";
+      position: absolute;
+      top: 16px;
+      left: 14px;
+      width: 12px;
+      height: 22px;
+      background: linear-gradient(#eee, #bbb);
+      border-radius: 2px;
+    }
 
+    /* عنوان الكتب */
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      color: #7d2f16;
+      font-weight: bold;
+      font-size: 18px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .section-title .count {
+      color: #4a2d16;
+      font-weight: normal;
+    }
+
+    /* رف الكتب */
+    .shelf {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(160px, 1fr));
+      gap: 26px;
+      align-items: end;
+      padding: 0 16px 22px;
+      margin-bottom: 38px;
+    }
+
+    .shelf::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      height: 10px;
+      background: linear-gradient(to bottom, #f0d8b6, #b67d42 45%, #8e582c 46%, #ddb67f);
+      border-radius: 2px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+    }
+
+    /* الكتاب */
+    .book-container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .book {
+      display: block;
+      width: 100%;
+      max-width: 190px;
+      height: 280px;
+      background: #eee;
+      border-radius: 3px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.1);
+      box-shadow: 0 10px 12px rgba(0,0,0,0.16);
+      transition: transform 0.2s ease;
+    }
+
+    .book:hover {
+      transform: translateY(-4px);
+    }
+
+    .book img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* بطاقة المعلومات */
+    .book-info {
+      display: none;
+      position: absolute;
+      top: 10px;
+      right: 205px;
+      width: 260px;
+      background: #d8dfe7;
+      border: 1px solid #b8c1cb;
+      border-radius: 4px;
+      padding: 12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.22);
+      text-align: right;
+      z-index: 10;
+    }
+
+    .book-info::after {
+      content: "";
+      position: absolute;
+      right: -14px;
+      top: 20px;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 14px solid #d8dfe7;
+    }
+
+    .book-container:hover .book-info {
+      display: block;
+    }
+
+    .book-info h4 {
+      margin: 0 0 8px;
+      color: #8b2f1d;
+      font-size: 18px;
+    }
+
+    .book-info p {
+      margin: 6px 0;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .stars {
+      margin-top: 8px;
+      color: #444;
+      letter-spacing: 2px;
+      font-size: 18px;
+    }
+
+    /* للشاشات الصغيرة */
+    @media (max-width: 1200px) {
+      .shelf {
+        grid-template-columns: repeat(3, minmax(160px, 1fr));
+      }
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+      }
+
+      .shelf {
+        grid-template-columns: repeat(2, minmax(160px, 1fr));
+      }
+
+      .book-info {
+        right: auto;
+        left: 0;
+        top: 100%;
+        margin-top: 10px;
+      }
+
+      .book-info::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .shelf {
+        grid-template-columns: 1fr;
+      }
+
+      .book {
+        max-width: 220px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<header>📚 مكتبة مؤلفات الصرخي الحسني</header>
+  <div class="topbar">مكتبة مؤلفات الصرخي الحسني</div>
 
-<!-- القائمة -->
-<div class="sidebar">
-    <h3>المؤلفات</h3>
-    <ul>
-        <li>البحوث الفلسفية</li>
-        <li>البحوث الأصولية</li>
-        <li>البحوث الفقهية</li>
-        <li>الرسالة العملية</li>
-        <li>بحوث المنطق وأصول الفقه</li>
-        <li>البحوث الأخلاقية</li>
-        <li>بحوث التفسير</li>
-        <li>البحوث العقائدية</li>
-        <li>البحوث التاريخية</li>
-        <li>المحاضرات</li>
-        <li>البيانات والمواقف</li>
-    </ul>
-</div>
+  <div class="page">
 
-<!-- المحتوى -->
-<div class="main">
+    <aside class="sidebar">
+      <h2>المؤلفات</h2>
+      <ul>
+        <li><a href="#">البحوث الفلسفية</a></li>
+        <li><a href="#">البحوث الأصولية</a></li>
+        <li><a href="#">البحوث الفقهية</a></li>
+        <li><a href="#">الرسالة العملية</a></li>
+        <li><a href="#">بحوث المنطق وأصول الفقه</a></li>
+        <li><a href="#">البحوث الأخلاقية</a></li>
+        <li><a href="#">بحوث التفسير</a></li>
+        <li><a href="#">البحوث العقائدية</a></li>
+        <li><a href="#">البحوث التاريخية</a></li>
+        <li><a href="#">المحاضرات</a></li>
+        <li><a href="#">البيانات والمواقف</a></li>
+      </ul>
+    </aside>
 
-<div class="shelf">
+    <main class="content">
+      <div class="content-header"></div>
 
-    <div class="books">
+      <div class="section-title">
+        <div>أحدث الكتب</div>
+        <div class="count">المجموع: 114 كتاب</div>
+      </div>
 
-        <!-- كتاب 1 -->
+      <div class="shelf">
+
         <div class="book-container">
-            <a href="books/book1.pdf" target="_blank" class="book">
-                <img src="images/book1.jpg">
-            </a>
-
-            <div class="book-info">
-                <h4>اسم الكتاب</h4>
-                <p>اسم المؤلف</p>
-                <p>وصف مختصر للكتاب</p>
-                ⭐⭐⭐⭐⭐
-            </div>
+          <a href="books/book1.pdf" target="_blank" class="book">
+            <img src="images/book1.jpg" alt="كتاب 1">
+          </a>
+          <div class="book-info">
+            <h4>اسم الكتاب 1</h4>
+            <p>اسم المؤلف</p>
+            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
+            <div class="stars">★★★★★</div>
+          </div>
         </div>
 
-        <!-- كتاب 2 -->
         <div class="book-container">
-            <a href="books/book2.pdf" target="_blank" class="book">
-                <img src="images/book2.jpg">
-            </a>
-
-            <div class="book-info">
-                <h4>كتاب آخر</h4>
-                <p>اسم المؤلف</p>
-                <p>وصف مختصر</p>
-                ⭐⭐⭐⭐
-            </div>
+          <a href="books/book2.pdf" target="_blank" class="book">
+            <img src="images/book2.jpg" alt="كتاب 2">
+          </a>
+          <div class="book-info">
+            <h4>اسم الكتاب 2</h4>
+            <p>اسم المؤلف</p>
+            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
+            <div class="stars">★★★★★</div>
+          </div>
         </div>
 
-    </div>
+        <div class="book-container">
+          <a href="books/book3.pdf" target="_blank" class="book">
+            <img src="images/book3.jpg" alt="كتاب 3">
+          </a>
+          <div class="book-info">
+            <h4>اسم الكتاب 3</h4>
+            <p>اسم المؤلف</p>
+            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
 
-</div>
+        <div class="book-container">
+          <a href="books/book4.pdf" target="_blank" class="book">
+            <img src="images/book4.jpg" alt="كتاب 4">
+          </a>
+          <div class="book-info">
+            <h4>اسم الكتاب 4</h4>
+            <p>اسم المؤلف</p>
+            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
 
-</div>
+      </div>
+
+      <div class="shelf">
+
+        <div class="book-container">
+          <a href="books/book5.pdf" target="_blank" class="book">
+            <img src="images/book5.jpg" alt="كتاب 5">
+          </a>
+          <div class="book-info">
+            <h4>اسم الكتاب 5</h4>
+            <p>اسم المؤلف</p>
+            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+
+        <div class="book-container">
+          <a href="books/book6.pdf" target="_blank" class="book">
+            <img src="images/book6.jpg" alt="كتاب 6">
+          </a>
+          <div class="book-info">
+            <h4>اسم الكتاب 6</h4>
+            <p>اسم المؤلف</p>
+            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+
+        <div class="book-container">
+          <a href="books/book7.pdf" target="_blank" class="book">
+            <img src="images/book7.jpg" alt="كتاب 7">
+          </a>
+          <div class="book-info">
+            <h4>اسم الكتاب 7</h4>
+            <p>اسم المؤلف</p>
+            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+
+        <div class="book-container">
+          <a href="books/book8.pdf" target="_blank" class="book">
+            <img src="images/book8.jpg" alt="كتاب 8">
+          </a>
+          <div class="book-info">
+            <h4>اسم الكتاب 8</h4>
+            <p>اسم المؤلف</p>
+            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="shelf">
+
+        <div class="book-container">
+          <a href="books/book9.pdf" target="_blank" class="book">
+            <img src="images/book9.jpg" alt="كتاب 9">
+          </a>
+          <div class="book-info">
+            <h4>اسم الكتاب 9</h4>
+            <p>اسم المؤلف</p>
+            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+
+        <div class="book-container">
+          <a href="books/book10.pdf" target="_blank" class="book">
+            <img src="images/book10.jpg" alt="كتاب 10">
+          </a>
+          <div class="book-info">
+            <h4>اسم الكتاب 10</h4>
+            <p>اسم المؤلف</p>
+            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+
+        <div class="book-container">
+          <a href="books/book11.pdf" target="_blank" class="book">
+            <img src="images/book11.jpg" alt="كتاب 11">
+          </a>
+          <div class="book-info">
+            <h4>اسم الكتاب 11</h4>
+            <p>اسم المؤلف</p>
+            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+
+        <div class="book-container">
+          <a href="books/book12.pdf" target="_blank" class="book">
+            <img src="images/book12.jpg" alt="كتاب 12">
+          </a>
+          <div class="book-info">
+            <h4>اسم الكتاب 12</h4>
+            <p>اسم المؤلف</p>
+            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
 
 </body>
 </html>
