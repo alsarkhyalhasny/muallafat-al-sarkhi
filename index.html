@@ -104,62 +104,99 @@
 
     .shelf {
       position: relative;
-      margin: 28px 0 36px;
-      padding: 16px 56px 26px;
-      background: linear-gradient(to right, #8a561f 0%, #b9782f 12%, #c88a3e 30%, #b9782f 55%, #8a561f 100%);
-      border: 4px solid #f5e7d0;
+      margin: 34px 0 54px;
+      padding: 18px 56px 36px;
       border-radius: 18px;
-      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.18), 0 10px 24px rgba(0,0,0,0.25);
+      border: 4px solid #efe2c9;
+      background:
+        linear-gradient(90deg, #8f551b 0%, #b8702b 18%, #cb8841 35%, #b8702b 60%, #8f551b 100%);
+      box-shadow:
+        inset 0 0 0 2px rgba(255,255,255,0.12),
+        0 12px 24px rgba(0,0,0,0.28);
     }
 
+    /* لوح الرف الأمامي */
     .shelf::after {
       content: "";
       position: absolute;
-      right: 12px;
-      left: 12px;
-      bottom: -12px;
-      height: 12px;
-      border-radius: 0 0 12px 12px;
-      background: linear-gradient(to bottom, #7a4317, #4d280d);
-      box-shadow: 0 8px 12px rgba(0,0,0,0.22);
+      right: 10px;
+      left: 10px;
+      bottom: -14px;
+      height: 16px;
+      border-radius: 0 0 14px 14px;
+      background: linear-gradient(to bottom, #7b4315, #4c260b);
+      box-shadow: 0 8px 12px rgba(0,0,0,0.25);
+    }
+
+    /* الحافة العلوية للرف */
+    .shelf::before {
+      content: "";
+      position: absolute;
+      right: 8px;
+      left: 8px;
+      top: 8px;
+      height: 10px;
+      border-radius: 10px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.18), rgba(255,255,255,0.02));
+      pointer-events: none;
     }
 
     .shelf-title {
       margin-bottom: 14px;
-      color: #fff9ef;
-      font-size: 24px;
+      color: #fff8ec;
+      font-size: 25px;
       font-weight: bold;
       text-align: center;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.35);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
     }
 
     .slider-wrapper {
       position: relative;
       overflow: hidden;
       width: 100%;
+      padding-bottom: 6px;
     }
 
     .books-track {
       display: flex;
-      gap: 16px;
+      gap: 18px;
       transition: transform 0.4s ease;
       will-change: transform;
+      align-items: flex-end;
     }
 
     .book {
-      flex: 0 0 calc(25% - 12px);
+      flex: 0 0 calc(25% - 14px);
       text-align: center;
       transition: transform 0.25s ease;
     }
 
     .book:hover {
-      transform: translateY(-6px) scale(1.03);
+      transform: translateY(-6px);
     }
 
+    .book-cover-link {
+      display: block;
+      text-decoration: none;
+    }
+
+    /* صندوق الغلاف */
+    .book-cover {
+      background: transparent;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      min-height: 270px;
+    }
+
+    /* إصلاح القص: لا نستخدم cover */
     .book img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 245px;
+      object-fit: contain;
       border-radius: 8px;
       border: 3px solid #f6e9d5;
       box-shadow: 0 8px 18px rgba(0,0,0,0.35);
@@ -169,8 +206,8 @@
 
     .browse-btn {
       display: inline-block;
-      margin-top: 10px;
-      padding: 8px 14px;
+      margin-top: 12px;
+      padding: 8px 16px;
       background: #ffffff;
       color: #145233;
       text-decoration: none;
@@ -188,13 +225,13 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 42px;
-      height: 42px;
+      width: 46px;
+      height: 46px;
       border: none;
       border-radius: 50%;
-      background: rgba(255,255,255,0.95);
+      background: rgba(255,255,255,0.96);
       color: #145233;
-      font-size: 24px;
+      font-size: 28px;
       font-weight: bold;
       cursor: pointer;
       box-shadow: 0 4px 12px rgba(0,0,0,0.25);
@@ -206,16 +243,16 @@
     }
 
     .arrow-prev {
-      left: 8px;
+      left: 6px;
     }
 
     .arrow-next {
-      right: 8px;
+      right: 6px;
     }
 
     @media (max-width: 1100px) {
       .book {
-        flex: 0 0 calc(33.333% - 11px);
+        flex: 0 0 calc(33.333% - 12px);
       }
     }
 
@@ -234,7 +271,15 @@
       }
 
       .book {
-        flex: 0 0 calc(50% - 8px);
+        flex: 0 0 calc(50% - 9px);
+      }
+
+      .book-cover {
+        min-height: 245px;
+      }
+
+      .book img {
+        max-height: 220px;
       }
     }
 
@@ -248,8 +293,12 @@
         flex: 0 0 100%;
       }
 
+      .book-cover {
+        min-height: 290px;
+      }
+
       .book img {
-        height: 260px;
+        max-height: 260px;
       }
     }
   </style>
@@ -287,10 +336,7 @@
       "البحوث الاخلاقية"
     ];
 
-    // للتجربة: نفس الكتاب مكرر
-    // لاحقًا تغيّر book1.jpg و book1.pdf لكل كتاب تريد
     const booksPerSection = 10;
-
     const container = document.getElementById("library-container");
 
     sections.forEach((sectionTitle, sectionIndex) => {
@@ -303,11 +349,11 @@
 
       const prevBtn = document.createElement("button");
       prevBtn.className = "arrow-btn arrow-prev";
-      prevBtn.innerHTML = "❯";
+      prevBtn.innerHTML = "‹";
 
       const nextBtn = document.createElement("button");
       nextBtn.className = "arrow-btn arrow-next";
-      nextBtn.innerHTML = "❮";
+      nextBtn.innerHTML = "›";
 
       const sliderWrapper = document.createElement("div");
       sliderWrapper.className = "slider-wrapper";
@@ -321,8 +367,10 @@
         book.className = "book";
 
         book.innerHTML = `
-          <a href="book1.pdf" download>
-            <img src="book1.jpg" alt="كتاب">
+          <a class="book-cover-link" href="book1.pdf" download>
+            <div class="book-cover">
+              <img src="book1.jpg" alt="كتاب">
+            </div>
           </a>
           <a href="book1.pdf" target="_blank" class="browse-btn">تصفح</a>
         `;
@@ -348,14 +396,17 @@
 
       function updateSlider() {
         const visibleCount = getVisibleCount();
-        const bookWidth = track.querySelector(".book").offsetWidth + 16;
-        track.style.transform = `translateX(-${currentIndex * bookWidth}px)`;
+        const firstBook = track.querySelector(".book");
+        const gap = 18;
+        const step = firstBook.offsetWidth + gap;
+
+        track.style.transform = `translateX(-${currentIndex * step}px)`;
 
         prevBtn.disabled = currentIndex === 0;
         nextBtn.disabled = currentIndex >= booksPerSection - visibleCount;
 
-        prevBtn.style.opacity = prevBtn.disabled ? "0.5" : "1";
-        nextBtn.style.opacity = nextBtn.disabled ? "0.5" : "1";
+        prevBtn.style.opacity = prevBtn.disabled ? "0.45" : "1";
+        nextBtn.style.opacity = nextBtn.disabled ? "0.45" : "1";
       }
 
       nextBtn.addEventListener("click", () => {
@@ -374,7 +425,7 @@
       });
 
       window.addEventListener("resize", updateSlider);
-      setTimeout(updateSlider, 100);
+      setTimeout(updateSlider, 120);
     });
   </script>
 
