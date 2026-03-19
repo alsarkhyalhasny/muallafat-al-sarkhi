@@ -1,378 +1,142 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>مكتبة المؤلفات</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: "Tahoma", Arial, sans-serif;
-    }
+const libraryData = [
+  {
+    name: "البحوث الفلسفية",
+    books: [
+      { title: "الإسلام ما بين الديمقراطية الرأسمالية والاشتراكية والشيوعية", pdf: "https://www.al-hasany.org/download/27407/" },
+      { title: "الإسلام ما بين الأفلاطونية والعقليين والنظرية الحسية والماركسية", pdf: "https://www.al-hasany.org/download/49263/" }
+    ]
+  },
 
-    body {
-      background: linear-gradient(to bottom, #f7f3eb, #ece2d0);
-      color: #2f2418;
-    }
+  {
+    name: "البحوث الأصولية",
+    books: [
+      { title: "الفكر المتين.. البراءة والتخيير – بحوث أصولية عالية – مع البراءة والتخيير للشيخ الفياض – الجزء الأول", pdf: "https://www.al-hasany.org/download/51859/" },
+      { title: "الفكر المتين - بحوث أصولية عالية – المدخل الجزء الثاني – أصالة البراءة", pdf: "" },
+      { title: "الفكر المتين - بحوث أصولية عالية – المدخل الجزء الثالث – مبحث الأوامر", pdf: "https://www.al-hasany.org/download/27423/" },
+      { title: "الفكر المتين - بحوث أصولية عالية – المدخل الجزء الرابع – أصالة الاحتياط", pdf: "" },
+      { title: "منهج الأصول – الجزء السابع، القسم الأول – حالات للأمر", pdf: "" },
+      { title: "منهج الأصول – الجزء السابع، القسم الثاني – مبحث الضد", pdf: "" },
+      { title: "الفكر المتين (ج1-ج2)، تقرير الدكتور غسان البهادلي", pdf: "" },
+      { title: "الفكر المتين (ج3-ج4)، تقرير الأستاذ رياض الكرعاوي", pdf: "" },
+      { title: "الفكر المتين (ج5-ج6)، تقرير الدكتور باسم الزيدي", pdf: "" },
+      { title: "الفكر المتين (ج7-ج8)، تقرير الأستاذ هادي البديري", pdf: "" }
+    ]
+  },
 
-    header {
-      background: linear-gradient(135deg, #5c3b1e, #8a5a2b);
-      color: #fff;
-      text-align: center;
-      padding: 30px 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
+  {
+    name: "البحوث الفقهية",
+    books: [
+      { title: "رسالة في نجاسة الخمر – بحث فقهي استدلالي", pdf: "" },
+      { title: "الفصل في القول الفصل – بحث فقهي لتنمية الملكة عند الفقيه", pdf: "" },
+      { title: "الفصل في الفريضة المعطلة، الجزء الأول – بين اجتهاد الخوئي وادعاء المدعي", pdf: "" },
+      { title: "الفصل في الفريضة المعطلة، الجزء الثاني – بين (رأي واستحسان) و(دليل وبرهان)", pdf: "" },
+      { title: "شبهة مستحكمة – بحث فقهي", pdf: "" },
+      { title: "لا تنافي ولا غفلة ولا تهافت في كلام السيد الصدر (قدس سره)", pdf: "" },
+      { title: "التدخين في نهار الصوم – بحث استدلالي مبسط", pdf: "" }
+    ]
+  },
 
-    header h1 {
-      font-size: 34px;
-      margin-bottom: 10px;
-    }
+  {
+    name: "الرسالة العملية",
+    books: [
+      { title: "المنهاج الواضح – بحوث أخلاقية وتمهيدية – القسم الأول", pdf: "" },
+      { title: "المنهاج الواضح – بحوث أخلاقية وتمهيدية – القسم الثاني", pdf: "" },
+      { title: "المنهاج الواضح: كتاب الاجتهاد والتقليد – كتاب الطهارة", pdf: "" },
+      { title: "المنهاج الواضح – كتاب الصلاة", pdf: "" },
+      { title: "المنهاج الواضح – كتاب الصيام • كتاب الخمس • كتاب الحج", pdf: "" },
+      { title: "المنهاج الواضح – كتاب التجارة", pdf: "" },
+      { title: "المنهاج الواضح – كتاب الجعالة • كتاب السبق والرماية • كتاب العارية ...", pdf: "" },
+      { title: "المنهاج الواضح – كتاب الوصية • كتاب الوقف • كتاب الدين", pdf: "" },
+      { title: "المنهاج الواضح – كتاب النكاح", pdf: "" },
+      { title: "المنهاج الواضح – كتاب الأطعمة والأشربة • كتاب الصيد والذباحة • كتاب الميراث", pdf: "" },
+      { title: "مختصر الأحكام الشرعية في المسائل الابتلائية", pdf: "" },
+      { title: "مسائل وردود: الجزء الأول", pdf: "" },
+      { title: "مسائل وردود: الجزء الثاني", pdf: "" },
+      { title: "فقه الدماء الثلاثة: الحيض والاستحاضة والنفاس", pdf: "" }
+    ]
+  },
 
-    header p {
-      font-size: 18px;
-      opacity: 0.95;
-    }
+  {
+    name: "بحوث المنطق وأصول الفقه",
+    books: [
+      { title: "المنطق وأصول الفقه – الجزء الأول", pdf: "" },
+      { title: "المنطق وأصول الفقه – الجزء الثاني", pdf: "" },
+      { title: "المنطق وأصول الفقه – الجزء الثالث", pdf: "" }
+    ]
+  },
 
-    .search-box {
-      max-width: 700px;
-      margin: 25px auto 10px;
-      padding: 0 15px;
-    }
+  {
+    name: "البحوث الأخلاقية",
+    books: [
+      { title: "معراج المؤمن", pdf: "" },
+      { title: "روح الصلاة", pdf: "" },
+      { title: "العبادة في شهر رمضان", pdf: "" },
+      { title: "الرحيل إلى الآخرة", pdf: "" },
+      { title: "الطهارة والرقي الاجتماعي", pdf: "" },
+      { title: "التقليد والسير في طريق التكامل", pdf: "" },
+      { title: "الآداب المعنوية للصلاة", pdf: "" }
+    ]
+  },
 
-    .search-box input {
-      width: 100%;
-      padding: 14px 18px;
-      border: 2px solid #b58a57;
-      border-radius: 14px;
-      font-size: 17px;
-      outline: none;
-      background: #fffdf9;
-    }
+  {
+    name: "بحوث التفسير",
+    books: [
+      { title: "الإنية والوجود والكشف والشهود", pdf: "" },
+      { title: "اللهم رب السموات السبع ورب الأرضين السبع", pdf: "" },
+      { title: "يوسف ومعونة الظالم", pdf: "" },
+      { title: "بحث حول تحريف القرآن", pdf: "" },
+      { title: "النور والظلمات", pdf: "" },
+      { title: "خلق الأرض وعلي في القرآن", pdf: "" },
+      { title: "ذكر اللام وتكرارها", pdf: "" },
+      { title: "اختلاف أمتي رحمة.. نقمة", pdf: "" }
+    ]
+  },
 
-    .search-box input:focus {
-      border-color: #7a4d22;
-      box-shadow: 0 0 8px rgba(122, 77, 34, 0.2);
-    }
+  {
+    name: "البحوث العقائدية",
+    books: [
+      { title: "الحذر من بدعة التراويح.. لأن {تنصت.. حمار}", pdf: "" },
+      { title: "تحريف القرآن السلفي السني.. ثابت بالتواتر – الجزء الأول", pdf: "" },
+      { title: "فحش السلفي أمر شيطاني شرعنه أحمد والبخاري وابن تيمية وشيوخ سنية", pdf: "" },
+      { title: "أتحدى السلفية والسنة وكل الإنس والجن لإثبات صحة كتاب البخاري أصولا ونسبة", pdf: "" },
+      { title: "سورة الفاضحة تسقط عدالة الصحابة وتثبت تحريف القرآن وجهل سيدنا عثمان (رض)", pdf: "" },
+      { title: "تحطيم صنمية البخاري", pdf: "" },
+      { title: "الدجال", pdf: "" },
+      { title: "السفياني", pdf: "" },
+      { title: "عبادة الأصنام – بحث عقائدي مبسط", pdf: "" },
+      { title: "علي (عليه السلام) وولاية الشام", pdf: "" },
+      { title: "صلح الإمام الحسن (عليه السلام)", pdf: "" },
+      { title: "الإخلاص – بحث عقائدي مبسط", pdf: "" },
+      { title: "قبسات حسنية في الحقيقة الحسينية", pdf: "" },
+      { title: "علي حبه جنة", pdf: "" },
+      { title: "نزيل السجون", pdf: "" },
+      { title: "أهل السنة وحب العترة", pdf: "" },
+      { title: "اتباع الحق هو الوحدة", pdf: "" },
+      { title: "الخضر ونصرة المنتظر", pdf: "" },
+      { title: "الخضر ونصرة المنتظر، لقاء الحجة، قم وكوفان", pdf: "" }
+    ]
+  },
 
-    .library {
-      max-width: 1200px;
-      margin: 30px auto;
-      padding: 0 20px 40px;
-    }
-
-    .section-title {
-      font-size: 28px;
-      margin-bottom: 25px;
-      text-align: center;
-      color: #5a3518;
-    }
-
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 22px;
-    }
-
-    .category-card {
-      background: #fffaf3;
-      border: 2px solid #d8b487;
-      border-radius: 18px;
-      padding: 25px 18px;
-      text-align: center;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-      transition: 0.3s ease;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .category-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 10px 22px rgba(0,0,0,0.14);
-      border-color: #8b5a2b;
-    }
-
-    .category-card::before {
-      content: "📚";
-      font-size: 38px;
-      display: block;
-      margin-bottom: 14px;
-    }
-
-    .category-card h3 {
-      font-size: 22px;
-      color: #4a2f16;
-      line-height: 1.6;
-    }
-
-    .category-card p {
-      margin-top: 10px;
-      font-size: 15px;
-      color: #7a6248;
-    }
-
-    .books-section {
-      max-width: 1200px;
-      margin: 20px auto 50px;
-      padding: 0 20px;
-      display: none;
-    }
-
-    .books-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .books-header h2 {
-      font-size: 28px;
-      color: #5a3518;
-    }
-
-    .back-btn {
-      background: #7a4d22;
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .back-btn:hover {
-      background: #5d3918;
-    }
-
-    .books-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 20px;
-    }
-
-    .book-card {
-      background: #fff;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid #d6c1a5;
-      box-shadow: 0 5px 14px rgba(0,0,0,0.08);
-      transition: 0.3s;
-    }
-
-    .book-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .book-cover {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-      background: #eee3d4;
-    }
-
-    .book-info {
-      padding: 14px;
-      text-align: center;
-    }
-
-    .book-info h4 {
-      font-size: 18px;
-      margin-bottom: 8px;
-      color: #3f2814;
-      line-height: 1.6;
-    }
-
-    .book-info a {
-      display: inline-block;
-      margin-top: 8px;
-      text-decoration: none;
-      background: #8a5a2b;
-      color: #fff;
-      padding: 9px 16px;
-      border-radius: 10px;
-      font-size: 15px;
-    }
-
-    .book-info a:hover {
-      background: #6f451f;
-    }
-
-    .empty-msg {
-      background: #fff8ef;
-      border: 1px dashed #c7a172;
-      padding: 25px;
-      border-radius: 14px;
-      text-align: center;
-      color: #6e5438;
-      font-size: 18px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #5c3b1e;
-      color: #fff;
-      margin-top: 40px;
-      font-size: 15px;
-    }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 28px;
-      }
-
-      .category-card h3 {
-        font-size: 19px;
-      }
-
-      .books-header h2 {
-        font-size: 23px;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <h1>مكتبة المؤلفات</h1>
-    <p>مكتبة إلكترونية خاصة بالمؤلفات والبحوث</p>
-  </header>
-
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="ابحث عن قسم..." onkeyup="filterCategories()" />
-  </div>
-
-  <section class="library" id="librarySection">
-    <h2 class="section-title">أقسام المؤلفات</h2>
-    <div class="categories" id="categoriesContainer"></div>
-  </section>
-
-  <section class="books-section" id="booksSection">
-    <div class="books-header">
-      <button class="back-btn" onclick="goBack()">رجوع إلى الأقسام</button>
-      <h2 id="booksTitle"></h2>
-    </div>
-    <div id="booksContent"></div>
-  </section>
-
-  <footer>
-    جميع الحقوق محفوظة © مكتبة المؤلفات
-  </footer>
-
-  <script>
-    const libraryData = [
-      {
-        name: "البحوث الفلسفية",
-        description: "قسم خاص بالبحوث الفلسفية",
-        books: []
-      },
-      {
-        name: "البحوث الأصولية",
-        description: "قسم خاص بالبحوث الأصولية",
-        books: []
-      },
-      {
-        name: "البحوث الفقهية",
-        description: "قسم خاص بالبحوث الفقهية",
-        books: []
-      },
-      {
-        name: "الرسالة العملية",
-        description: "قسم خاص بالرسالة العملية",
-        books: []
-      },
-      {
-        name: "بحوث المنطق وأصول الفقه",
-        description: "قسم خاص ببحوث المنطق وأصول الفقه",
-        books: []
-      },
-      {
-        name: "البحوث الأخلاقية",
-        description: "قسم خاص بالبحوث الأخلاقية",
-        books: []
-      },
-      {
-        name: "بحوث التفسير",
-        description: "قسم خاص ببحوث التفسير",
-        books: []
-      },
-      {
-        name: "البحوث العقائدية",
-        description: "قسم خاص بالبحوث العقائدية",
-        books: []
-      },
-      {
-        name: "البحوث التاريخية",
-        description: "قسم خاص بالبحوث التاريخية",
-        books: []
-      }
-    ];
-
-    const categoriesContainer = document.getElementById("categoriesContainer");
-    const booksSection = document.getElementById("booksSection");
-    const booksTitle = document.getElementById("booksTitle");
-    const booksContent = document.getElementById("booksContent");
-    const librarySection = document.getElementById("librarySection");
-
-    function renderCategories(data) {
-      categoriesContainer.innerHTML = "";
-      data.forEach((category, index) => {
-        categoriesContainer.innerHTML += `
-          <div class="category-card" onclick="openCategory(${index})">
-            <h3>${category.name}</h3>
-            <p>${category.description}</p>
-          </div>
-        `;
-      });
-    }
-
-    function openCategory(index) {
-      const category = libraryData[index];
-      booksTitle.textContent = category.name;
-
-      if (!category.books || category.books.length === 0) {
-        booksContent.innerHTML = `
-          <div class="empty-msg">
-            لا توجد كتب مضافة حاليًا داخل هذا القسم
-          </div>
-        `;
-      } else {
-        booksContent.innerHTML = `<div class="books-grid">
-          ${category.books.map(book => `
-            <div class="book-card">
-              <img class="book-cover" src="${book.image}" alt="${book.title}">
-              <div class="book-info">
-                <h4>${book.title}</h4>
-                <a href="${book.pdf}" target="_blank">فتح الكتاب</a>
-              </div>
-            </div>
-          `).join("")}
-        </div>`;
-      }
-
-      librarySection.style.display = "none";
-      booksSection.style.display = "block";
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function goBack() {
-      booksSection.style.display = "none";
-      librarySection.style.display = "block";
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function filterCategories() {
-      const value = document.getElementById("searchInput").value.trim();
-      const filtered = libraryData.filter(cat => cat.name.includes(value));
-      renderCategories(filtered);
-    }
-
-    renderCategories(libraryData);
-  </script>
-
-</body>
-</html>
+  {
+    name: "البحوث التاريخية",
+    books: [
+      { title: "وقفات مع توحيد ابن تيمية الجسمي الأسطوري – المحاضرة 1", pdf: "" },
+      { title: "وقفات مع توحيد ابن تيمية الجسمي الأسطوري – المحاضرة 2", pdf: "" },
+      { title: "وقفات مع توحيد ابن تيمية الجسمي الأسطوري – المحاضرة 7", pdf: "" },
+      { title: "وقفات مع توحيد ابن تيمية الجسمي الأسطوري – المحاضرة 8", pdf: "" },
+      { title: "وقفات مع توحيد ابن تيمية الجسمي الأسطوري – المحاضرة 24 و25", pdf: "" },
+      { title: "وقفات مع توحيد ابن تيمية الجسمي الأسطوري – المحاضرة 47", pdf: "" },
+      { title: "وقفات مع توحيد ابن تيمية الجسمي الأسطوري – المحاضرة 48", pdf: "" },
+      { title: "وقفات مع توحيد ابن تيمية الجسمي الأسطوري – المحاضرة 49", pdf: "" },
+      { title: "وقفات مع توحيد ابن تيمية الجسمي الأسطوري – المحاضرة 50", pdf: "" },
+      { title: "وقفات مع توحيد ابن تيمية الجسمي الأسطوري – المحاضرة 51", pdf: "" },
+      { title: "وقفات مع توحيد ابن تيمية الجسمي الأسطوري – المحاضرة 52", pdf: "" },
+      { title: "الدولة.. المارقة.. في عصر الظهور.. منذ عهد الرسول – الجزء الأول", pdf: "" },
+      { title: "محاضرات متفرقة – المحاضرة 1", pdf: "" },
+      { title: "محاضرات متفرقة – المحاضرة 2", pdf: "" },
+      { title: "محاضرات متفرقة – المحاضرة 14", pdf: "" },
+      { title: "محاضرات متفرقة – المحاضرة 15", pdf: "" },
+      { title: "محاضرات متفرقة – المحاضرتان 16 و17", pdf: "" }
+    ]
+  }
+];
