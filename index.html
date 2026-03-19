@@ -1,120 +1,118 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>المكتبة الشاملة لمؤلفات المرجع المهندس الصرخي الحسني</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Tahoma;
-      background: #e9e4db;
-    }
+<title>المكتبة الشاملة لمؤلفات المرجع المهندس الصرخي الحسني</title>
 
-    header {
-      background: linear-gradient(135deg,#6e451f,#8b5a2b);
-      color: #fff;
-      text-align: center;
-      padding: 25px;
-    }
+<style>
+body {
+  margin:0;
+  font-family:Tahoma;
+  background:#e9e4db;
+}
 
-    header h1 {
-      margin: 0;
-      font-size: 30px;
-    }
+header {
+  background:linear-gradient(135deg,#6e451f,#8b5a2b);
+  color:#fff;
+  text-align:center;
+  padding:25px;
+}
 
-    header p {
-      margin-top: 8px;
-      font-size: 18px;
-    }
+header h1 {
+  margin:0;
+  font-size:28px;
+}
 
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 20px;
-    }
+header p {
+  margin-top:8px;
+}
 
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-      gap: 15px;
-    }
+.container {
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
 
-    .category {
-      background: #fff;
-      padding: 20px;
-      text-align: center;
-      border-radius: 12px;
-      cursor: pointer;
-      border: 2px solid #d6b187;
-    }
+.categories {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+}
 
-    .category:hover {
-      background: #f3e9dc;
-    }
+.category {
+  background:#fff;
+  padding:20px;
+  text-align:center;
+  border-radius:12px;
+  cursor:pointer;
+  border:2px solid #d6b187;
+}
 
-    .books {
-      display: none;
-    }
+.category:hover {
+  background:#f3e9dc;
+}
 
-    .book {
-      background: #fff;
-      border-radius: 12px;
-      padding: 15px;
-      margin-bottom: 15px;
-      text-align: center;
-    }
+.books {
+  display:none;
+}
 
-    .book img {
-      width: 150px;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
+.book {
+  background:#fff;
+  border-radius:12px;
+  padding:15px;
+  margin-bottom:15px;
+  text-align:center;
+}
 
-    .btns a {
-      display: inline-block;
-      margin: 5px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      text-decoration: none;
-      color: white;
-    }
+.book img {
+  width:150px;
+  height:220px;
+  object-fit:cover;
+  border-radius:8px;
+}
 
-    .read { background:#8b5a2b; }
-    .download { background:#5a3818; }
+.btns a {
+  display:inline-block;
+  margin:5px;
+  padding:8px 12px;
+  border-radius:8px;
+  text-decoration:none;
+  color:white;
+}
 
-    .back {
-      margin-bottom: 15px;
-      padding: 10px;
-      background: #8b5a2b;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      border-radius: 8px;
-    }
-  </style>
+.read { background:#8b5a2b; }
+.download { background:#5a3818; }
+
+.back {
+  margin-bottom:15px;
+  padding:10px;
+  background:#8b5a2b;
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  border-radius:8px;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>المكتبة الشاملة لمؤلفات المرجع المهندس الصرخي الحسني</h1>
-  <p>مكتبة إلكترونية شاملة لجميع المؤلفات والبحوث</p>
+<h1>المكتبة الشاملة لمؤلفات المرجع المهندس الصرخي الحسني</h1>
+<p>مكتبة إلكترونية شاملة لجميع المؤلفات والبحوث</p>
 </header>
 
 <div class="container">
 
-  <!-- الأقسام -->
-  <div id="categories" class="categories"></div>
+<div id="categories" class="categories"></div>
 
-  <!-- الكتب -->
-  <div id="books" class="books">
-    <button class="back" onclick="goBack()">رجوع</button>
-    <h2 id="title"></h2>
-    <div id="list"></div>
-  </div>
+<div id="books" class="books">
+<button class="back" onclick="goBack()">رجوع</button>
+<h2 id="title"></h2>
+<div id="list"></div>
+</div>
 
 </div>
 
@@ -131,10 +129,9 @@ const library = [
     name: "البحوث الأصولية",
     books: [
       {
-{
-  title: "الفكر المتين – البراءة والتخيير – الجزء الأول",
-  image: "book1.jpg",
-  pdf: "book1.pdf"
+        title: "الفكر المتين – البراءة والتخيير – الجزء الأول",
+        image: "book1.jpg",
+        pdf: "book1.pdf"
       }
     ]
   },
@@ -178,21 +175,22 @@ library.forEach((c,i)=>{
   catDiv.innerHTML += `<div class="category" onclick="openCat(${i})">${c.name}</div>`;
 });
 
-// فتح قسم
+// فتح القسم
 function openCat(i){
   const c = library[i];
   title.innerText = c.name;
-  catDiv.style.display = "none";
-  booksDiv.style.display = "block";
+
+  catDiv.style.display="none";
+  booksDiv.style.display="block";
 
   if(c.books.length===0){
-    list.innerHTML = "لا توجد كتب";
+    list.innerHTML="لا توجد كتب";
     return;
   }
 
   list.innerHTML = c.books.map(b=>`
     <div class="book">
-      <img src="${b.image || placeholder}">
+      <img src="${b.image || placeholder}" onerror="this.src='${placeholder}'">
       <h3>${b.title}</h3>
 
       <div class="btns">
