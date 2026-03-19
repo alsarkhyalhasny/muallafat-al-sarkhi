@@ -22,7 +22,7 @@
 
     .page-frame {
       width: 96%;
-      max-width: 1450px;
+      max-width: 1650px;
       margin: 14px auto;
       border: 6px solid #fff;
       border-radius: 22px;
@@ -104,8 +104,8 @@
 
     .shelf {
       position: relative;
-      margin: 34px 0 54px;
-      padding: 18px 56px 36px;
+      margin: 36px 0 60px;
+      padding: 18px 72px 40px;
       border-radius: 18px;
       border: 4px solid #efe2c9;
       background:
@@ -115,34 +115,21 @@
         0 12px 24px rgba(0,0,0,0.28);
     }
 
-    /* لوح الرف الأمامي */
+    /* سطح الرف الخشبي */
     .shelf::after {
       content: "";
       position: absolute;
       right: 10px;
       left: 10px;
-      bottom: -14px;
-      height: 16px;
+      bottom: -16px;
+      height: 18px;
       border-radius: 0 0 14px 14px;
       background: linear-gradient(to bottom, #7b4315, #4c260b);
       box-shadow: 0 8px 12px rgba(0,0,0,0.25);
     }
 
-    /* الحافة العلوية للرف */
-    .shelf::before {
-      content: "";
-      position: absolute;
-      right: 8px;
-      left: 8px;
-      top: 8px;
-      height: 10px;
-      border-radius: 10px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.18), rgba(255,255,255,0.02));
-      pointer-events: none;
-    }
-
     .shelf-title {
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       color: #fff8ec;
       font-size: 25px;
       font-weight: bold;
@@ -154,25 +141,49 @@
       position: relative;
       overflow: hidden;
       width: 100%;
-      padding-bottom: 6px;
+      padding-bottom: 8px;
     }
 
     .books-track {
       display: flex;
-      gap: 18px;
+      gap: 24px;
       transition: transform 0.4s ease;
       will-change: transform;
       align-items: flex-end;
     }
 
     .book {
-      flex: 0 0 calc(25% - 14px);
+      flex: 0 0 auto;
+      width: 220px;
       text-align: center;
-      transition: transform 0.25s ease;
+      position: relative;
+      padding: 0 10px;
+    }
+
+    /* الفاصل الخشبي بين الكتب */
+    .book::before,
+    .book::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      width: 10px;
+      height: 115px;
+      border-radius: 4px;
+      background: linear-gradient(to bottom, #8a4d16, #5a2f0d);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+    }
+
+    .book::before {
+      right: -12px;
+    }
+
+    .book::after {
+      left: -12px;
     }
 
     .book:hover {
       transform: translateY(-6px);
+      transition: 0.25s ease;
     }
 
     .book-cover-link {
@@ -180,23 +191,17 @@
       text-decoration: none;
     }
 
-    /* صندوق الغلاف */
     .book-cover {
-      background: transparent;
-      padding: 0;
       display: flex;
       justify-content: center;
       align-items: flex-end;
-      min-height: 270px;
+      min-height: 320px;
     }
 
-    /* إصلاح القص: لا نستخدم cover */
     .book img {
-      width: auto;
-      max-width: 100%;
-      height: auto;
-      max-height: 245px;
-      object-fit: contain;
+      width: 200px;
+      height: 300px;
+      object-fit: fill;
       border-radius: 8px;
       border: 3px solid #f6e9d5;
       box-shadow: 0 8px 18px rgba(0,0,0,0.35);
@@ -223,19 +228,19 @@
 
     .arrow-btn {
       position: absolute;
-      top: 50%;
+      top: 54%;
       transform: translateY(-50%);
-      width: 46px;
-      height: 46px;
+      width: 50px;
+      height: 50px;
       border: none;
       border-radius: 50%;
       background: rgba(255,255,255,0.96);
       color: #145233;
-      font-size: 28px;
+      font-size: 30px;
       font-weight: bold;
       cursor: pointer;
       box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      z-index: 2;
+      z-index: 5;
     }
 
     .arrow-btn:hover {
@@ -243,20 +248,14 @@
     }
 
     .arrow-prev {
-      left: 6px;
+      left: 10px;
     }
 
     .arrow-next {
-      right: 6px;
+      right: 10px;
     }
 
-    @media (max-width: 1100px) {
-      .book {
-        flex: 0 0 calc(33.333% - 12px);
-      }
-    }
-
-    @media (max-width: 850px) {
+    @media (max-width: 900px) {
       .header-content {
         grid-template-columns: 1fr;
       }
@@ -268,37 +267,6 @@
 
       .title-area h1 {
         font-size: 28px;
-      }
-
-      .book {
-        flex: 0 0 calc(50% - 9px);
-      }
-
-      .book-cover {
-        min-height: 245px;
-      }
-
-      .book img {
-        max-height: 220px;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .shelf {
-        padding-right: 50px;
-        padding-left: 50px;
-      }
-
-      .book {
-        flex: 0 0 100%;
-      }
-
-      .book-cover {
-        min-height: 290px;
-      }
-
-      .book img {
-        max-height: 260px;
       }
     }
   </style>
@@ -337,6 +305,7 @@
     ];
 
     const booksPerSection = 10;
+    const visibleBooks = 4;
     const container = document.getElementById("library-container");
 
     sections.forEach((sectionTitle, sectionIndex) => {
@@ -360,7 +329,6 @@
 
       const track = document.createElement("div");
       track.className = "books-track";
-      track.id = `track-${sectionIndex}`;
 
       for (let i = 0; i < booksPerSection; i++) {
         const book = document.createElement("div");
@@ -386,32 +354,20 @@
       container.appendChild(shelf);
 
       let currentIndex = 0;
-
-      function getVisibleCount() {
-        if (window.innerWidth <= 520) return 1;
-        if (window.innerWidth <= 850) return 2;
-        if (window.innerWidth <= 1100) return 3;
-        return 4;
-      }
+      const step = 244; // عرض الكتاب + الفراغات والفواصل
 
       function updateSlider() {
-        const visibleCount = getVisibleCount();
-        const firstBook = track.querySelector(".book");
-        const gap = 18;
-        const step = firstBook.offsetWidth + gap;
-
         track.style.transform = `translateX(-${currentIndex * step}px)`;
 
         prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex >= booksPerSection - visibleCount;
+        nextBtn.disabled = currentIndex >= booksPerSection - visibleBooks;
 
         prevBtn.style.opacity = prevBtn.disabled ? "0.45" : "1";
         nextBtn.style.opacity = nextBtn.disabled ? "0.45" : "1";
       }
 
       nextBtn.addEventListener("click", () => {
-        const visibleCount = getVisibleCount();
-        if (currentIndex < booksPerSection - visibleCount) {
+        if (currentIndex < booksPerSection - visibleBooks) {
           currentIndex++;
           updateSlider();
         }
@@ -424,8 +380,7 @@
         }
       });
 
-      window.addEventListener("resize", updateSlider);
-      setTimeout(updateSlider, 120);
+      updateSlider();
     });
   </script>
 
