@@ -211,3 +211,77 @@ function goBack(){
 
 </body>
 </html>
+
+<div class="shelf">
+  ${c.books.map(b=>`
+    <div class="book">
+      <img src="${b.image || placeholder}">
+      <p>${b.title}</p>
+
+      <div class="btns">
+        <a class="read" href="${b.pdf}" target="_blank">📖</a>
+        <a class="download" href="${b.pdf}" download>⬇</a>
+      </div>
+    </div>
+  `).join("")}
+</div>
+.shelf {
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  padding:20px;
+  background:linear-gradient(#8b5a2b,#6e451f);
+  border-radius:10px;
+  position:relative;
+}
+
+/* خط الرف */
+.shelf::after {
+  content:"";
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:12px;
+  background:#5a3818;
+  box-shadow:0 5px 10px rgba(0,0,0,0.4);
+}
+
+.book {
+  width:120px;
+  text-align:center;
+  position:relative;
+}
+
+.book img {
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:4px;
+  box-shadow:0 5px 10px rgba(0,0,0,0.4);
+  transition:0.3s;
+}
+
+/* حركة عند المرور */
+.book img:hover {
+  transform:translateY(-8px);
+}
+
+.book p {
+  font-size:13px;
+  color:#fff;
+  margin-top:8px;
+}
+
+.btns a {
+  display:inline-block;
+  margin-top:5px;
+  font-size:12px;
+  padding:4px 6px;
+  border-radius:5px;
+  text-decoration:none;
+  color:#fff;
+}
+
+.read { background:#3e6b3e; }
+.download { background:#444; }
