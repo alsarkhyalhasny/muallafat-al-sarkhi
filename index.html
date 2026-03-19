@@ -1,351 +1,173 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>مؤلفات الصرخي الحسني</title>
-  <style>
-    :root{
-      --bg:#f6f8fb;
-      --card:#ffffff;
-      --text:#0f172a;
-      --muted:#64748b;
-      --primary:#1e40af;
-      --primary2:#2563eb;
-      --border:#e2e8f0;
-      --shadow:0 10px 30px rgba(15,23,42,.08);
-      --radius:18px;
-      --container:1200px;
-    }
+<meta charset="UTF-8">
+<title>مؤلفات الصرخي الحسني</title>
 
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Tahoma, Arial, sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.7;
-    }
+<style>
+body {
+    margin: 0;
+    font-family: Tahoma;
+    background: linear-gradient(#d9a766, #c58c4c);
+    direction: rtl;
+}
 
-    a{ text-decoration:none; color:inherit; }
-    img{ display:block; max-width:100%; }
+/* الهيدر */
+header {
+    background: #6b4226;
+    color: white;
+    padding: 15px;
+    font-size: 22px;
+    text-align: center;
+}
 
-    .container{
-      width:min(var(--container), calc(100% - 32px));
-      margin:auto;
-    }
+/* القائمة الجانبية */
+.sidebar {
+    width: 250px;
+    float: left;
+    background: #e6d5c3;
+    padding: 20px;
+    min-height: 100vh;
+}
 
-    .topbar{
-      background:#fff;
-      border-bottom:1px solid var(--border);
-      position:sticky;
-      top:0;
-      z-index:1000;
-    }
+.sidebar h3 {
+    color: #6b4226;
+}
 
-    .nav{
-      min-height:70px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-    }
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight:700;
-      color:var(--primary);
-      font-size:20px;
-    }
+.sidebar li {
+    padding: 6px 0;
+}
 
-    .brand-badge{
-      width:42px;
-      height:42px;
-      border-radius:12px;
-      display:grid;
-      place-items:center;
-      background:linear-gradient(135deg,var(--primary),var(--primary2));
-      color:#fff;
-    }
+/* المحتوى */
+.main {
+    margin-left: 260px;
+    padding: 20px;
+}
 
-    .menu{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
+/* الرف */
+.shelf {
+    background: #8b5a2b;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+}
 
-    .menu a{
-      padding:10px 14px;
-      border-radius:999px;
-      color:#334155;
-      font-size:15px;
-    }
+/* الكتب */
+.books {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+}
 
-    .menu a:hover{
-      background:#eff6ff;
-      color:var(--primary);
-    }
+/* الكتاب */
+.book {
+    width: 200px;
+    height: 300px;
+    background: white;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 6px 10px rgba(0,0,0,0.4);
+}
 
-    .hero{
-      background:linear-gradient(rgba(15,23,42,.65), rgba(15,23,42,.75)), url('images/hero.jpg') center/cover no-repeat;
-      color:#fff;
-    }
+.book img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 
-    .hero-inner{
-      min-height:360px;
-      display:grid;
-      align-content:center;
-      text-align:center;
-      padding:60px 0;
-    }
+/* الحاوية */
+.book-container {
+    position: relative;
+}
 
-    .hero h1{
-      margin:0 0 10px;
-      font-size:42px;
-    }
+/* مربع المعلومات */
+.book-info {
+    display: none;
+    position: absolute;
+    right: -260px;
+    top: 20px;
+    width: 250px;
+    background: #dfe5eb;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    text-align: right;
+}
 
-    .hero p{
-      margin:0 auto 24px;
-      max-width:700px;
-      color:#e2e8f0;
-    }
+.book-container:hover .book-info {
+    display: block;
+}
+</style>
 
-    .hero-actions{
-      display:flex;
-      justify-content:center;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    .btn{
-      display:inline-block;
-      padding:12px 18px;
-      border-radius:14px;
-      font-weight:700;
-    }
-
-    .btn-primary{
-      background:linear-gradient(135deg,var(--primary),var(--primary2));
-      color:#fff;
-    }
-
-    .btn-light{
-      background:rgba(255,255,255,.15);
-      color:#fff;
-      border:1px solid rgba(255,255,255,.25);
-    }
-
-    .search-box{
-      margin-top:-30px;
-      position:relative;
-      z-index:5;
-    }
-
-    .search-card{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:20px;
-      box-shadow:var(--shadow);
-      padding:16px;
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-
-    .search-card input,
-    .search-card select{
-      flex:1 1 250px;
-      min-height:50px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:0 14px;
-      font-size:16px;
-    }
-
-    section{
-      padding:55px 0;
-    }
-
-    .section-head{
-      margin-bottom:20px;
-    }
-
-    .section-head h2{
-      margin:0 0 6px;
-      font-size:30px;
-    }
-
-    .section-head p{
-      margin:0;
-      color:var(--muted);
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:18px;
-    }
-
-    .category-card,
-    .book-card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-
-    .category-card{
-      padding:18px;
-    }
-
-    .category-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      margin-bottom:8px;
-    }
-
-    .category-card h3,
-    .book-card h3{
-      margin:0;
-      font-size:18px;
-    }
-
-    .count{
-      font-size:13px;
-      color:var(--primary);
-      background:#eff6ff;
-      border-radius:999px;
-      padding:6px 10px;
-      white-space:nowrap;
-      font-weight:700;
-    }
-
-    .category-card p{
-      margin:0;
-      color:var(--muted);
-      font-size:14px;
-    }
-
-    .books-grid{
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      gap:18px;
-    }
-
-    .book-card{
-      overflow:hidden;
-    }
-
-    .book-cover{
-      aspect-ratio:3 / 4.2;
-      background:#e2e8f0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#64748b;
-      font-size:14px;
-      overflow:hidden;
-    }
-
-    .book-cover img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-    }
-
-    .book-body{
-      padding:14px;
-    }
-
-    .book-body h3{
-      margin-bottom:8px;
-      min-height:50px;
-      line-height:1.5;
-    }
-
-    .book-meta{
-      color:var(--muted);
-      font-size:14px;
-      margin:0;
-    }
-
-    .book-actions{
-      display:flex;
-      gap:8px;
-      margin-top:14px;
-    }
-
-    .book-actions a{
-      flex:1;
-      text-align:center;
-      padding:10px 12px;
-      border-radius:12px;
-      font-size:14px;
-      font-weight:700;
-    }
-
-    .read-link{
-      background:#eff6ff;
-      color:var(--primary);
-    }
-
-    .download-link{
-      background:var(--primary);
-      color:#fff;
-    }
-
-    .footer{
-      padding:28px 0 36px;
-      border-top:1px solid var(--border);
-      background:#fff;
-      color:#64748b;
-      text-align:center;
-    }
-
-    @media (max-width:1100px){
-      .books-grid{ grid-template-columns:repeat(4,1fr); }
-      .grid{ grid-template-columns:repeat(3,1fr); }
-    }
-
-    @media (max-width:850px){
-      .menu{ display:none; }
-      .books-grid{ grid-template-columns:repeat(2,1fr); }
-      .grid{ grid-template-columns:repeat(2,1fr); }
-      .hero h1{ font-size:32px; }
-    }
-
-    @media (max-width:560px){
-      .books-grid,
-      .grid{
-        grid-template-columns:1fr;
-      }
-      .container{
-        width:min(var(--container), calc(100% - 20px));
-      }
-      .hero-inner{
-        min-height:300px;
-      }
-      .hero h1{
-        font-size:28px;
-      }
-    }
-  </style>
 </head>
+
 <body>
 
-  <header class="topbar">
-    <div class="container nav">
-      <div class="brand">
-        <div class="brand-badge">📚</div>
-        <div>مؤلفات الصرخي الحسني</div>
-      </div>
+<header>📚 مكتبة مؤلفات الصرخي الحسني</header>
 
-      <nav class="menu">
-        <a href="#home">الرئيسية</a>
-        <a href="#sections">أقسام المكتبة</a>
-        <a href="#featured">أشهر الكتب</
+<!-- القائمة -->
+<div class="sidebar">
+    <h3>المؤلفات</h3>
+    <ul>
+        <li>البحوث الفلسفية</li>
+        <li>البحوث الأصولية</li>
+        <li>البحوث الفقهية</li>
+        <li>الرسالة العملية</li>
+        <li>بحوث المنطق وأصول الفقه</li>
+        <li>البحوث الأخلاقية</li>
+        <li>بحوث التفسير</li>
+        <li>البحوث العقائدية</li>
+        <li>البحوث التاريخية</li>
+        <li>المحاضرات</li>
+        <li>البيانات والمواقف</li>
+    </ul>
+</div>
+
+<!-- المحتوى -->
+<div class="main">
+
+<div class="shelf">
+
+    <div class="books">
+
+        <!-- كتاب 1 -->
+        <div class="book-container">
+            <a href="books/book1.pdf" target="_blank" class="book">
+                <img src="images/book1.jpg">
+            </a>
+
+            <div class="book-info">
+                <h4>اسم الكتاب</h4>
+                <p>اسم المؤلف</p>
+                <p>وصف مختصر للكتاب</p>
+                ⭐⭐⭐⭐⭐
+            </div>
+        </div>
+
+        <!-- كتاب 2 -->
+        <div class="book-container">
+            <a href="books/book2.pdf" target="_blank" class="book">
+                <img src="images/book2.jpg">
+            </a>
+
+            <div class="book-info">
+                <h4>كتاب آخر</h4>
+                <p>اسم المؤلف</p>
+                <p>وصف مختصر</p>
+                ⭐⭐⭐⭐
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</body>
+</html>
