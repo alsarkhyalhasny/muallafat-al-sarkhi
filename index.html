@@ -6,678 +6,565 @@
   <title>مؤلفات الصرخي الحسني</title>
   <style>
     :root{
-      --bg:#f6f8fb;
-      --card:#ffffff;
-      --text:#0f172a;
-      --muted:#64748b;
-      --primary:#1e40af;
-      --primary-2:#2563eb;
-      --border:#e2e8f0;
-      --shadow:0 10px 30px rgba(15,23,42,.08);
-      --radius:18px;
-      --container:1200px;
+      --wood1:#d9a766;
+      --wood2:#c58c4c;
+      --wood3:#b37537;
+      --wood4:#8c5325;
+      --brown:#6d3f1f;
+      --brown-dark:#4f2a11;
+      --cream:#fffdf8;
+      --line:#c69056;
+      --shadow:0 8px 20px rgba(73,38,12,.18);
+      --container:1180px;
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family:"Tahoma","Segoe UI",sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.7;
+      font-family:Tahoma, Arial, sans-serif;
+      color:#4b2c14;
+      background:
+        repeating-linear-gradient(90deg,#d9a766 0,#d9a766 22px,#d7a260 22px,#d7a260 44px,#d29a57 44px,#d29a57 66px,#dcb172 66px,#dcb172 88px),
+        linear-gradient(#e0b47b,#c98744);
+      min-height:100vh;
     }
 
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    .container{width:min(var(--container),calc(100% - 32px));margin-inline:auto}
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%}
+    .container{width:min(var(--container),calc(100% - 28px));margin:auto}
 
-    .topbar{
-      position:sticky;
-      top:0;
-      z-index:1000;
-      background:rgba(255,255,255,.92);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--border);
+    .top-strip{
+      background:rgba(255,255,255,.28);
+      border-bottom:1px solid rgba(90,49,20,.15);
+      box-shadow:0 1px 0 rgba(255,255,255,.35) inset;
+    }
+
+    .head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 0 10px;
+    }
+
+    .site-title{
+      font-size:2.35rem;
+      font-weight:700;
+      color:#51311a;
+      text-shadow:0 1px 0 rgba(255,255,255,.45);
+    }
+
+    .login-btn{
+      background:linear-gradient(#5d5d5d,#2f2f2f);
+      color:#fff;
+      border-radius:7px;
+      padding:9px 14px;
+      font-size:.95rem;
+      box-shadow:var(--shadow);
+    }
+
+    .nav-wrap{
+      background:#f3f0ea;
+      border-top:1px solid rgba(255,255,255,.65);
+      border-bottom:1px solid #cfb193;
+      box-shadow:0 2px 5px rgba(0,0,0,.08);
     }
 
     .nav{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:20px;
-      min-height:72px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      font-weight:700;
-      font-size:1.15rem;
-      color:var(--primary);
-    }
-
-    .brand-badge{
-      width:42px;
-      height:42px;
-      border-radius:12px;
-      display:grid;
-      place-items:center;
-      color:#fff;
-      background:linear-gradient(135deg,var(--primary),var(--primary-2));
-      box-shadow:var(--shadow);
-      font-size:1.2rem;
+      gap:16px;
+      min-height:56px;
     }
 
     .menu{
       display:flex;
-      align-items:center;
-      gap:10px;
       flex-wrap:wrap;
+      gap:4px;
+      align-items:center;
     }
 
     .menu a{
       padding:10px 14px;
-      border-radius:999px;
-      color:#334155;
-      font-size:.95rem;
-      transition:.2s ease;
+      border-radius:4px;
+      color:#5b3920;
+      font-size:1rem;
     }
 
-    .menu a:hover,
-    .menu a.active{
-      background:#eff6ff;
-      color:var(--primary);
+    .menu a.active,
+    .menu a:hover{
+      color:#b24322;
+      background:rgba(178,67,34,.07);
     }
 
-    .hero{
+    .signup-ribbon{
       position:relative;
-      overflow:hidden;
+      background:#c91e12;
       color:#fff;
-      background:
-        linear-gradient(rgba(15,23,42,.62),rgba(15,23,42,.75)),
-        url('images/hero.jpg') center/cover no-repeat;
+      font-weight:700;
+      padding:10px 18px;
+      border-radius:4px 4px 0 0;
+      box-shadow:var(--shadow);
+      line-height:1.15;
+      text-align:center;
+      min-width:132px;
     }
 
-    .hero::after{
+    .signup-ribbon::after,
+    .signup-ribbon::before{
       content:"";
       position:absolute;
-      inset:0;
-      background:radial-gradient(circle at top right, rgba(37,99,235,.35), transparent 35%);
-      pointer-events:none;
+      bottom:-16px;
+      border-top:16px solid #96150d;
+      border-left:16px solid transparent;
+      border-right:16px solid transparent;
     }
 
-    .hero-inner{
-      position:relative;
-      z-index:1;
-      min-height:420px;
+    .signup-ribbon::after{left:0}
+    .signup-ribbon::before{right:0}
+
+    .layout{
       display:grid;
-      align-content:center;
-      text-align:center;
-      padding:72px 0;
+      grid-template-columns:minmax(0,1fr) 310px;
+      gap:26px;
+      padding:26px 0 50px;
     }
 
-    .hero h1{
+    .content-title,
+    .side-title{
+      color:#b24322;
+      font-size:1.1rem;
       margin:0 0 12px;
-      font-size:clamp(2rem,4vw,3.5rem);
-      line-height:1.2;
+      padding-bottom:8px;
+      border-bottom:1px solid rgba(128,68,26,.15);
     }
 
-    .hero p{
-      width:min(760px,100%);
-      margin:0 auto 24px;
-      color:#e2e8f0;
-      font-size:1.05rem;
-    }
-
-    .hero-actions{
-      display:flex;
-      justify-content:center;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      min-width:150px;
-      padding:12px 18px;
-      border-radius:14px;
-      border:1px solid transparent;
-      font-weight:700;
-      transition:.2s ease;
-      cursor:pointer;
-    }
-
-    .btn-primary{
-      background:linear-gradient(135deg,var(--primary),var(--primary-2));
-      color:#fff;
-      box-shadow:var(--shadow);
-    }
-
-    .btn-primary:hover{transform:translateY(-2px)}
-
-    .btn-light{
-      background:rgba(255,255,255,.12);
-      border-color:rgba(255,255,255,.22);
-      color:#fff;
-    }
-
-    .search-box{
-      margin-top:-36px;
-      position:relative;
-      z-index:2;
-    }
-
-    .search-card{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:22px;
-      box-shadow:var(--shadow);
-      padding:16px;
-      display:flex;
-      gap:12px;
-      align-items:center;
-      flex-wrap:wrap;
-    }
-
-    .search-card input,
-    .search-card select{
-      flex:1 1 260px;
-      min-height:52px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:0 16px;
-      font-size:1rem;
-      outline:none;
-      background:#fff;
-    }
-
-    .search-card input:focus,
-    .search-card select:focus{
-      border-color:#93c5fd;
-      box-shadow:0 0 0 4px rgba(59,130,246,.12);
-    }
-
-    section{padding:56px 0}
-    .section-head{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:22px;
-      flex-wrap:wrap;
-    }
-
-    .section-head h2{
-      margin:0;
-      font-size:1.7rem;
-    }
-
-    .section-head p{
-      margin:6px 0 0;
-      color:var(--muted);
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:18px;
-    }
-
-    .category-card,
-    .book-card,
-    .author-card,
-    .feature-card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-
-    .category-card{
-      padding:18px;
-      transition:.2s ease;
-    }
-
-    .category-card:hover{transform:translateY(-4px)}
-    .category-top{
+    .content-head{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:10px;
+      gap:12px;
       margin-bottom:8px;
     }
 
-    .category-card h3,
-    .book-card h3,
-    .author-card h3,
-    .feature-card h3{
-      margin:0;
-      font-size:1.05rem;
-    }
-
-    .count{
+    .content-head .count{
+      font-size:1rem;
+      color:#5b3920;
       white-space:nowrap;
-      font-size:.88rem;
-      color:var(--primary);
-      background:#eff6ff;
-      border-radius:999px;
-      padding:6px 10px;
-      font-weight:700;
     }
 
-    .category-card p,
-    .feature-card p,
-    .author-card p,
-    .book-meta{
-      margin:0;
-      color:var(--muted);
-      font-size:.95rem;
-    }
+    .shelf-section{margin-bottom:18px}
 
-    .books-grid{
+    .shelf{
+      position:relative;
       display:grid;
-      grid-template-columns:repeat(5,minmax(0,1fr));
-      gap:18px;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:22px;
+      align-items:end;
+      padding:0 18px 18px;
+      margin-bottom:26px;
+    }
+
+    .shelf::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      height:12px;
+      background:linear-gradient(#f1debe,#c79557 38%,#8e592c 39%,#d9b37c 100%);
+      border-radius:2px;
+      box-shadow:0 2px 4px rgba(0,0,0,.15);
+    }
+
+    .shelf::before{
+      content:"";
+      position:absolute;
+      bottom:-9px;
+      left:9%;
+      width:14px;
+      height:22px;
+      background:#b58146;
+      box-shadow:240px 0 0 #b58146, 480px 0 0 #b58146, 720px 0 0 #b58146;
+      border-radius:0 0 2px 2px;
+      opacity:.9;
     }
 
     .book-card{
-      overflow:hidden;
-      transition:.2s ease;
+      position:relative;
+      z-index:1;
     }
 
-    .book-card:hover{transform:translateY(-5px)}
-
     .book-cover{
-      aspect-ratio: 3 / 4.2;
-      background:#e2e8f0;
+      display:block;
+      background:#fff;
+      border:1px solid rgba(111,62,24,.18);
+      box-shadow:0 10px 12px rgba(66,37,15,.18);
+      border-radius:3px;
       overflow:hidden;
+      aspect-ratio: 0.68 / 1;
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+
+    .book-cover:hover{
+      transform:translateY(-5px);
+      box-shadow:0 18px 20px rgba(66,37,15,.25);
     }
 
     .book-cover img{
       width:100%;
       height:100%;
       object-fit:cover;
+      background:#ececec;
     }
 
-    .book-body{padding:14px}
-
-    .book-body h3{
-      min-height:52px;
-      margin-bottom:8px;
-      line-height:1.5;
+    .book-caption{
+      display:none;
+      position:absolute;
+      left:calc(100% + 14px);
+      top:10px;
+      width:260px;
+      background:linear-gradient(#dfe5eb,#ced5dd);
+      border:1px solid #b7c0cb;
+      box-shadow:var(--shadow);
+      border-radius:4px;
+      padding:14px 14px 12px;
+      z-index:5;
+      color:#4b2c14;
     }
 
-    .book-actions{
-      display:flex;
-      gap:8px;
-      margin-top:14px;
+    .book-card.featured .book-caption{display:block}
+
+    .book-caption::before{
+      content:"";
+      position:absolute;
+      right:-14px;
+      top:20px;
+      border-top:10px solid transparent;
+      border-bottom:10px solid transparent;
+      border-left:14px solid #ced5dd;
     }
 
-    .book-actions a{
-      flex:1;
-      text-align:center;
-      padding:10px 12px;
-      border-radius:12px;
-      font-weight:700;
+    .book-caption h3{
+      margin:0 0 6px;
+      color:#b24322;
+      font-size:1rem;
+    }
+
+    .book-caption .meta{
+      margin:0 0 6px;
       font-size:.92rem;
+      color:#6a4a30;
     }
 
-    .read-link{background:#eff6ff;color:var(--primary)}
-    .download-link{background:var(--primary);color:#fff}
-
-    .authors-grid,
-    .features-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:18px;
+    .book-caption .desc{
+      margin:8px 0 10px;
+      color:#5a4637;
+      font-size:.92rem;
+      line-height:1.6;
     }
 
-    .author-card,
-    .feature-card{padding:20px}
+    .stars{color:#4d4d4d;font-size:1rem;letter-spacing:2px}
 
-    .author-card .avatar{
-      width:56px;
-      height:56px;
-      border-radius:16px;
+    .side-box{
+      margin-bottom:24px;
+    }
+
+    .search-box select,
+    .search-box input{
+      width:100%;
+      height:42px;
+      border:1px solid #b67d43;
+      background:rgba(255,238,214,.25);
+      padding:0 12px;
+      color:#5a361c;
+      margin-bottom:10px;
+      border-radius:4px;
+      font-size:.95rem;
+    }
+
+    .search-btn{
+      display:inline-block;
+      background:linear-gradient(#5f5f5f,#2f2f2f);
+      color:#fff;
+      padding:9px 16px;
+      border-radius:6px;
+      font-weight:700;
+    }
+
+    .category-list{
+      list-style:none;
+      margin:0;
+      padding:0;
+      columns:1;
+    }
+
+    .category-list li{
+      padding:4px 0;
+      color:#5b3920;
+      font-size:.96rem;
+    }
+
+    .category-list li::before{
+      content:"▸";
+      margin-left:8px;
+      color:#7a512a;
+    }
+
+    .pagination{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      margin:12px 0 30px;
+      flex-wrap:wrap;
+    }
+
+    .pagination a,
+    .pagination span{
+      min-width:32px;
+      height:32px;
       display:grid;
       place-items:center;
-      background:#eff6ff;
-      color:var(--primary);
-      font-weight:800;
-      margin-bottom:14px;
+      border-radius:4px;
+      background:#2f2f2f;
+      color:#fff;
+      font-weight:700;
+    }
+
+    .pagination .num{
+      background:transparent;
+      color:#5b3920;
+      font-weight:700;
+    }
+
+    .pagination .current{
+      background:#d9a14f;
+      color:#fff;
     }
 
     .footer{
-      padding:28px 0 36px;
-      border-top:1px solid var(--border);
-      background:#fff;
-      color:#475569;
+      background:linear-gradient(#7c481f,#5c3214);
+      color:#fff2df;
+      margin-top:20px;
+      border-top:3px solid rgba(255,255,255,.12);
     }
 
-    .footer-grid{
+    .footer-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:22px 0;
+      flex-wrap:wrap;
+      font-size:.92rem;
+    }
+
+    .footer-menu{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .socials{
+      display:flex;
+      gap:8px;
+    }
+
+    .socials a{
+      width:34px;
+      height:34px;
       display:grid;
-      grid-template-columns:2fr 1fr 1fr;
-      gap:24px;
+      place-items:center;
+      background:rgba(0,0,0,.22);
+      border-radius:4px;
+      font-weight:700;
     }
 
-    .footer h4{
-      margin:0 0 10px;
-      color:var(--text);
+    @media (max-width:1000px){
+      .layout{grid-template-columns:1fr}
+      .shelf{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .shelf::before{display:none}
+      .book-card.featured .book-caption{display:none}
     }
 
-    .footer p,
-    .footer li{color:#64748b}
-    .footer ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
-
-    @media (max-width:1100px){
-      .books-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-      .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width:720px){
+      .head,.nav{flex-direction:column;align-items:flex-start}
+      .nav{padding:10px 0}
+      .signup-ribbon{align-self:flex-end}
+      .shelf{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding:0 10px 16px}
+      .site-title{font-size:1.8rem}
     }
 
-    @media (max-width:860px){
-      .menu{display:none}
-      .grid,.books-grid,.authors-grid,.features-grid,.footer-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-      }
-      .hero-inner{min-height:360px}
-    }
-
-    @media (max-width:560px){
-      .container{width:min(var(--container),calc(100% - 20px))}
-      .grid,.books-grid,.authors-grid,.features-grid,.footer-grid{
-        grid-template-columns:1fr;
-      }
-      .hero p{font-size:.98rem}
-      .search-card{padding:12px}
-      .btn{width:100%}
-      .hero-actions{display:grid;grid-template-columns:1fr}
-      .topbar{position:static}
+    @media (max-width:460px){
+      .container{width:min(var(--container),calc(100% - 16px))}
+      .shelf{grid-template-columns:1fr 1fr}
+      .menu a{padding:8px 10px;font-size:.92rem}
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container nav">
-      <a href="#" class="brand">
-        <span class="brand-badge">📚</span>
-        <span>مؤلفات الصرخي الحسني</span>
-      </a>
-
-      <nav class="menu">
-        <a href="#" class="active">الرئيسية</a>
-        <a href="#sections">أقسام المكتبة</a>
-        <a href="#authors">المؤلفون</a>
-        <a href="#featured">أشهر الكتب</a>
-        <a href="#search">البحث</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="hero">
-    <div class="container hero-inner">
-      <h1>مؤلفات الصرخي الحسني</h1>
-      <p>
-        مكتبة إلكترونية شاملة لعرض المؤلفات والبحوث والكتب والبيانات والمحاضرات
-        بطريقة منظمة وسهلة التصفح، مع أقسام واضحة وبحث سريع وواجهة حديثة.
-      </p>
-      <div class="hero-actions">
-        <a href="#sections" class="btn btn-primary">تصفح الأقسام</a>
-        <a href="#featured" class="btn btn-light">أشهر الكتب</a>
-      </div>
-    </div>
-  </section>
-
-  <div class="container search-box" id="search">
-    <div class="search-card">
-      <input type="text" placeholder="ابحث في المكتبة..." />
-      <select>
-        <option>كل الأقسام</option>
-        <option>العقائد</option>
-        <option>الفقه</option>
-        <option>الأصول</option>
-        <option>الردود</option>
-        <option>المحاضرات</option>
-      </select>
-      <a href="#" class="btn btn-primary">بحث</a>
+  <div class="top-strip">
+    <div class="container head">
+      <div class="site-title">مؤلفات الصرخي الحسني</div>
+      <a href="#" class="login-btn">دخول</a>
     </div>
   </div>
 
-  <section id="sections">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>أقسام المكتبة</h2>
-          <p>قسم الكتب حسب الموضوع لتسهيل الوصول إلى المحتوى.</p>
+  <div class="nav-wrap">
+    <div class="container nav">
+      <nav class="menu">
+        <a href="#" class="active">الرئيسية</a>
+        <a href="#">الكتب</a>
+        <a href="#">المجلات</a>
+        <a href="#">طريقة الاستخدام</a>
+        <a href="#">اتصل بنا</a>
+        <a href="#">الأسئلة الشائعة</a>
+      </nav>
+      <div class="signup-ribbon">مستخدم جديد؟<br>سجل هنا</div>
+    </div>
+  </div>
+
+  <main class="container layout">
+    <section>
+      <div class="content-head">
+        <h2 class="content-title">أحدث الكتب</h2>
+        <div class="count">المجموع: 114 كتاب</div>
+      </div>
+
+      <div class="shelf-section">
+        <div class="shelf">
+          <article class="book-card">
+            <a class="book-cover" href="books/book1.pdf" target="_blank"><img src="images/book1.jpg" alt="كتاب 1"></a>
+          </article>
+
+          <article class="book-card">
+            <a class="book-cover" href="books/book2.pdf" target="_blank"><img src="images/book2.jpg" alt="كتاب 2"></a>
+          </article>
+
+          <article class="book-card featured">
+            <a class="book-cover" href="books/book3.pdf" target="_blank"><img src="images/book3.jpg" alt="كتاب 3"></a>
+            <div class="book-caption">
+              <h3>اسم الكتاب</h3>
+              <p class="meta">اسم المؤلف</p>
+              <p class="desc">هذا وصف مختصر للكتاب كما في موقعك السابق، بدون تغيير للمعلومات الأصلية.</p>
+              <div class="stars">★★★★★</div>
+            </div>
+          </article>
+
+          <article class="book-card">
+            <a class="book-cover" href="books/book4.pdf" target="_blank"><img src="images/book4.jpg" alt="كتاب 4"></a>
+          </article>
+        </div>
+
+        <div class="shelf">
+          <article class="book-card">
+            <a class="book-cover" href="books/book5.pdf" target="_blank"><img src="images/book5.jpg" alt="كتاب 5"></a>
+          </article>
+          <article class="book-card">
+            <a class="book-cover" href="books/book6.pdf" target="_blank"><img src="images/book6.jpg" alt="كتاب 6"></a>
+          </article>
+          <article class="book-card">
+            <a class="book-cover" href="books/book7.pdf" target="_blank"><img src="images/book7.jpg" alt="كتاب 7"></a>
+          </article>
+          <article class="book-card">
+            <a class="book-cover" href="books/book8.pdf" target="_blank"><img src="images/book8.jpg" alt="كتاب 8"></a>
+          </article>
+        </div>
+
+        <div class="shelf">
+          <article class="book-card">
+            <a class="book-cover" href="books/book9.pdf" target="_blank"><img src="images/book9.jpg" alt="كتاب 9"></a>
+          </article>
+          <article class="book-card">
+            <a class="book-cover" href="books/book10.pdf" target="_blank"><img src="images/book10.jpg" alt="كتاب 10"></a>
+          </article>
+          <article class="book-card">
+            <a class="book-cover" href="books/book11.pdf" target="_blank"><img src="images/book11.jpg" alt="كتاب 11"></a>
+          </article>
+          <article class="book-card">
+            <a class="book-cover" href="books/book12.pdf" target="_blank"><img src="images/book12.jpg" alt="كتاب 12"></a>
+          </article>
         </div>
       </div>
 
-      <div class="grid">
-        <a class="category-card" href="#">
-          <div class="category-top">
-            <h3>العقائد</h3>
-            <span class="count">35 كتاب</span>
-          </div>
-          <p>كتب البحوث العقائدية والردود الفكرية.</p>
-        </a>
-
-        <a class="category-card" href="#">
-          <div class="category-top">
-            <h3>الفقه</h3>
-            <span class="count">21 كتاب</span>
-          </div>
-          <p>كتب فقهية ومسائل تطبيقية وأبحاث استدلالية.</p>
-        </a>
-
-        <a class="category-card" href="#">
-          <div class="category-top">
-            <h3>الأصول</h3>
-            <span class="count">14 كتاب</span>
-          </div>
-          <p>أبحاث أصولية وقواعد استنباطية.</p>
-        </a>
-
-        <a class="category-card" href="#">
-          <div class="category-top">
-            <h3>الردود</h3>
-            <span class="count">18 كتاب</span>
-          </div>
-          <p>ردود علمية ومنهجية على الإشكالات والشبهات.</p>
-        </a>
-
-        <a class="category-card" href="#">
-          <div class="category-top">
-            <h3>المحاضرات</h3>
-            <span class="count">42 مادة</span>
-          </div>
-          <p>محاضرات وملفات توثيقية قابلة للعرض والتحميل.</p>
-        </a>
-
-        <a class="category-card" href="#">
-          <div class="category-top">
-            <h3>البيانات والمواقف</h3>
-            <span class="count">27 ملف</span>
-          </div>
-          <p>بيانات رسمية ومواقف موثقة وأرشيف منظم.</p>
-        </a>
-
-        <a class="category-card" href="#">
-          <div class="category-top">
-            <h3>القرآن الكريم</h3>
-            <span class="count">8 مواد</span>
-          </div>
-          <p>مواد قرآنية وتفسيرية متعلقة بالمؤلفات.</p>
-        </a>
-
-        <a class="category-card" href="#">
-          <div class="category-top">
-            <h3>كتب عامة</h3>
-            <span class="count">12 كتاب</span>
-          </div>
-          <p>إصدارات متنوعة لا تندرج ضمن الأقسام الرئيسية.</p>
-        </a>
+      <div class="pagination">
+        <a href="#">«</a>
+        <a href="#">‹</a>
+        <span class="num">1</span>
+        <span class="num">2</span>
+        <span class="num current">3</span>
+        <span class="num">4</span>
+        <span class="num">5</span>
+        <span class="num">6</span>
+        <a href="#">›</a>
+        <a href="#">»</a>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="featured">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>أشهر الكتب</h2>
-          <p>واجهة مشابهة لفكرة الموقع الذي أرسلته، لكن باسمك ومحتواك.</p>
-        </div>
+    <aside>
+      <div class="side-box search-box">
+        <h2 class="side-title">البحث</h2>
+        <select>
+          <option>اختر القسم</option>
+        </select>
+        <select>
+          <option>اختر المؤلف</option>
+        </select>
+        <select>
+          <option>اختر اللغة</option>
+        </select>
+        <input type="text" placeholder="العنوان">
+        <a class="search-btn" href="#">بحث</a>
       </div>
 
-      <div class="books-grid">
-        <article class="book-card">
-          <div class="book-cover"><img src="images/book1.jpg" alt="كتاب 1"></div>
-          <div class="book-body">
-            <h3>اسم الكتاب الأول</h3>
-            <p class="book-meta">قسم العقائد</p>
-            <div class="book-actions">
-              <a class="read-link" href="books/book1.pdf" target="_blank">قراءة</a>
-              <a class="download-link" href="books/book1.pdf" download>تحميل</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="book-card">
-          <div class="book-cover"><img src="images/book2.jpg" alt="كتاب 2"></div>
-          <div class="book-body">
-            <h3>اسم الكتاب الثاني</h3>
-            <p class="book-meta">قسم الفقه</p>
-            <div class="book-actions">
-              <a class="read-link" href="books/book2.pdf" target="_blank">قراءة</a>
-              <a class="download-link" href="books/book2.pdf" download>تحميل</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="book-card">
-          <div class="book-cover"><img src="images/book3.jpg" alt="كتاب 3"></div>
-          <div class="book-body">
-            <h3>اسم الكتاب الثالث</h3>
-            <p class="book-meta">قسم الأصول</p>
-            <div class="book-actions">
-              <a class="read-link" href="books/book3.pdf" target="_blank">قراءة</a>
-              <a class="download-link" href="books/book3.pdf" download>تحميل</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="book-card">
-          <div class="book-cover"><img src="images/book4.jpg" alt="كتاب 4"></div>
-          <div class="book-body">
-            <h3>اسم الكتاب الرابع</h3>
-            <p class="book-meta">قسم الردود</p>
-            <div class="book-actions">
-              <a class="read-link" href="books/book4.pdf" target="_blank">قراءة</a>
-              <a class="download-link" href="books/book4.pdf" download>تحميل</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="book-card">
-          <div class="book-cover"><img src="images/book5.jpg" alt="كتاب 5"></div>
-          <div class="book-body">
-            <h3>اسم الكتاب الخامس</h3>
-            <p class="book-meta">قسم المحاضرات</p>
-            <div class="book-actions">
-              <a class="read-link" href="books/book5.pdf" target="_blank">قراءة</a>
-              <a class="download-link" href="books/book5.pdf" download>تحميل</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="authors">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>المؤلفون</h2>
-          <p>يمكنك لاحقاً تخصيصها باسم مؤلف واحد أو أكثر.</p>
-        </div>
+      <div class="side-box">
+        <h2 class="side-title">التصنيفات</h2>
+        <ul class="category-list">
+          <li>العقائد</li>
+          <li>الفقه</li>
+          <li>الأصول</li>
+          <li>الردود</li>
+          <li>المحاضرات</li>
+          <li>البيانات</li>
+          <li>القرآن الكريم</li>
+          <li>كتب عامة</li>
+          <li>البحوث</li>
+          <li>المناظرات</li>
+          <li>التاريخ</li>
+          <li>المقالات</li>
+        </ul>
       </div>
 
-      <div class="authors-grid">
-        <article class="author-card">
-          <div class="avatar">ص</div>
-          <h3>المرجع الصرخي الحسني</h3>
-          <p>البحوث والمؤلفات والردود العلمية والمنهجية.</p>
-        </article>
-
-        <article class="author-card">
-          <div class="avatar">ب</div>
-          <h3>قسم البحوث</h3>
-          <p>مواد بحثية وملفات مساعدة مرتبطة بالمؤلفات.</p>
-        </article>
-
-        <article class="author-card">
-          <div class="avatar">أ</div>
-          <h3>الأرشيف العلمي</h3>
-          <p>فهرسة المؤلفات وتحديث الإصدارات بشكل دوري.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>مزايا الموقع</h2>
-          <p>شكل قريب من alsunniah.com لكن مخصص لمكتبتك.</p>
-        </div>
+      <div class="side-box">
+        <h2 class="side-title">كتاب الأسبوع</h2>
       </div>
 
-      <div class="features-grid">
-        <article class="feature-card">
-          <h3>بحث سريع</h3>
-          <p>حقل بحث واضح في أعلى الصفحة ليسهل الوصول إلى الكتب بسرعة.</p>
-        </article>
-        <article class="feature-card">
-          <h3>أقسام منظمة</h3>
-          <p>عرض الأقسام في بطاقات أنيقة مع عدد الكتب داخل كل قسم.</p>
-        </article>
-        <article class="feature-card">
-          <h3>عرض حديث للكتب</h3>
-          <p>بطاقات كتب بصورة الغلاف واسم الكتاب وأزرار القراءة والتحميل.</p>
-        </article>
+      <div class="side-box">
+        <h2 class="side-title">مؤلف مميز</h2>
       </div>
-    </div>
-  </section>
+    </aside>
+  </main>
 
   <footer class="footer">
-    <div class="container footer-grid">
+    <div class="container footer-inner">
       <div>
-        <h4>نبذة عن الموقع</h4>
-        <p>
-          مكتبة إلكترونية لعرض مؤلفات الصرخي الحسني والبحوث والبيانات والمواد العلمية
-          بطريقة حديثة وسهلة التصفح.
-        </p>
+        <div class="footer-menu">
+          <a href="#">الرئيسية</a>
+          <a href="#">الكتب</a>
+          <a href="#">المجلات</a>
+          <a href="#">طريقة الاستخدام</a>
+          <a href="#">اتصل بنا</a>
+          <a href="#">الأسئلة الشائعة</a>
+        </div>
+        <div style="margin-top:8px;opacity:.9;">© جميع الحقوق محفوظة لموقع مؤلفات الصرخي الحسني</div>
       </div>
-      <div>
-        <h4>روابط مهمة</h4>
-        <ul>
-          <li><a href="#sections">أقسام المكتبة</a></li>
-          <li><a href="#featured">أشهر الكتب</a></li>
-          <li><a href="#authors">المؤلفون</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>تواصل</h4>
-        <ul>
-          <li><a href="#">سياسة الخصوصية</a></li>
-          <li><a href="#">اتصل بنا</a></li>
-          <li><a href="#">الأسئلة الشائعة</a></li>
-        </ul>
+      <div class="socials">
+        <a href="#">f</a>
+        <a href="#">t</a>
+        <a href="#">b</a>
       </div>
     </div>
   </footer>
