@@ -8,104 +8,81 @@
 body {
     margin: 0;
     font-family: Tahoma;
-    background: #e9e4dc;
+    background: #111;
+    color: white;
     direction: rtl;
+}
+
+/* الهيدر */
+header {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(45deg, #1a1a1a, #333);
+    font-size: 24px;
+}
+
+/* الأقسام */
+.section {
+    padding: 20px;
+}
+
+.section h2 {
+    margin-bottom: 15px;
+    color: #f5c16c;
+}
+
+/* الشبكة */
+.books {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* الكرت */
+.card {
+    background: #1e1e1e;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+/* الصورة */
+.card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+/* المعلومات */
+.card-content {
+    padding: 10px;
     text-align: center;
 }
 
-/* العنوان */
-header {
-    background: #4b2e1e;
-    color: white;
-    padding: 15px;
-    font-size: 22px;
+/* الاسم */
+.card-title {
+    font-size: 16px;
+    margin-bottom: 10px;
 }
 
-/* عنوان القسم */
-h2 {
-    margin-top: 30px;
-    color: #4b2e1e;
-}
-
-/* الرف */
-.shelf {
-    position: relative;
-    background: linear-gradient(#a47148, #5c3a21);
-    padding: 30px 20px 40px;
-    margin: 20px;
-    border-radius: 10px;
-    box-shadow: inset 0 -15px 25px rgba(0,0,0,0.5);
-}
-
-/* قاعدة الرف */
-.shelf::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 15px;
-    background: #3e2617;
-    border-radius: 0 0 10px 10px;
-}
-
-/* الكتب */
-.books {
-    display: flex;
-    gap: 15px;
-    overflow-x: auto;
-    padding-bottom: 10px;
-}
-
-/* الكتاب */
-.book {
-    width: 200px;
-    height: 300px;
-    background: white;
+/* زر */
+.btn {
+    display: inline-block;
+    padding: 8px 12px;
+    background: #f5c16c;
+    color: black;
+    text-decoration: none;
     border-radius: 5px;
-    box-shadow: 0 8px 12px rgba(0,0,0,0.5);
-    transition: 0.3s;
-    flex-shrink: 0;
-    position: relative;
+    font-size: 14px;
 }
 
-/* تأثير */
-.book:hover {
-    transform: translateY(-10px) scale(1.05);
-}
-
-/* صورة */
-.book img {
-    width: 100%;
-    height: 100%;
-    border-radius: 5px;
-}
-
-/* الفاصل بين الكتب */
-.book::after {
-    content: "";
-    position: absolute;
-    right: -8px;
-    top: 0;
-    width: 8px;
-    height: 100%;
-    background: #3e2617;
-    border-radius: 2px;
-}
-
-/* أزرار */
-.nav-btn {
-    background: #4b2e1e;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    margin: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.nav-btn:hover {
-    background: #6a3f28;
+.btn:hover {
+    background: #ffdb9e;
 }
 </style>
 
@@ -115,57 +92,30 @@ h2 {
 
 <header>📚 مكتبة مؤلفات الصرخي الحسني</header>
 
-<!-- قسم 1 -->
-<h2>قسم العقائد</h2>
+<!-- قسم -->
+<div class="section">
+    <h2>قسم العقائد</h2>
 
-<div class="shelf">
-    <button class="nav-btn" onclick="scrollBooks('a', -1)">⬅️</button>
+    <div class="books">
 
-    <div class="books" id="books-a">
-
-        <a href="books/book1.pdf" target="_blank" class="book">
+        <div class="card">
             <img src="images/book1.jpg">
-        </a>
+            <div class="card-content">
+                <div class="card-title">اسم الكتاب</div>
+                <a href="books/book1.pdf" target="_blank" class="btn">قراءة</a>
+            </div>
+        </div>
 
-        <a href="books/book2.pdf" target="_blank" class="book">
+        <div class="card">
             <img src="images/book2.jpg">
-        </a>
+            <div class="card-content">
+                <div class="card-title">كتاب آخر</div>
+                <a href="books/book2.pdf" target="_blank" class="btn">قراءة</a>
+            </div>
+        </div>
 
     </div>
-
-    <button class="nav-btn" onclick="scrollBooks('a', 1)">➡️</button>
 </div>
-
-<!-- قسم 2 -->
-<h2>قسم الفقه</h2>
-
-<div class="shelf">
-    <button class="nav-btn" onclick="scrollBooks('b', -1)">⬅️</button>
-
-    <div class="books" id="books-b">
-
-        <a href="books/book3.pdf" target="_blank" class="book">
-            <img src="images/book3.jpg">
-        </a>
-
-        <a href="books/book4.pdf" target="_blank" class="book">
-            <img src="images/book4.jpg">
-        </a>
-
-    </div>
-
-    <button class="nav-btn" onclick="scrollBooks('b', 1)">➡️</button>
-</div>
-
-<script>
-function scrollBooks(id, direction) {
-    const container = document.getElementById("books-" + id);
-    container.scrollBy({
-        left: direction * 300,
-        behavior: "smooth"
-    });
-}
-</script>
 
 </body>
 </html>
