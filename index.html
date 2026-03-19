@@ -1,388 +1,171 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>مؤلفات الصرخي</title>
+<meta charset="UTF-8">
+<title>مؤلفات الصرخي الحسني</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+body {
+    margin: 0;
+    font-family: Tahoma;
+    background: #e9e4dc;
+    direction: rtl;
+    text-align: center;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background:
-        radial-gradient(circle at top right, rgba(255,255,255,0.07), transparent 25%),
-        radial-gradient(circle at bottom left, rgba(255,255,255,0.05), transparent 25%),
-        linear-gradient(to bottom, #1f6a43, #145233);
-      color: white;
-    }
+/* العنوان */
+header {
+    background: #4b2e1e;
+    color: white;
+    padding: 15px;
+    font-size: 22px;
+}
 
-    .page-frame {
-      width: 96%;
-      max-width: 1650px;
-      margin: 14px auto;
-      border: 6px solid #fff;
-      border-radius: 22px;
-      padding: 18px;
-      background: rgba(255,255,255,0.04);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-      position: relative;
-      overflow: hidden;
-    }
+/* عنوان القسم */
+h2 {
+    margin-top: 30px;
+    color: #4b2e1e;
+}
 
-    .page-frame::before,
-    .page-frame::after {
-      content: "❁";
-      position: absolute;
-      font-size: 42px;
-      color: rgba(255,255,255,0.8);
-    }
+/* الرف */
+.shelf {
+    position: relative;
+    background: linear-gradient(#a47148, #5c3a21);
+    padding: 30px 20px 40px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: inset 0 -15px 25px rgba(0,0,0,0.5);
+}
 
-    .page-frame::before {
-      top: 10px;
-      right: 16px;
-    }
+/* قاعدة الرف */
+.shelf::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 15px;
+    background: #3e2617;
+    border-radius: 0 0 10px 10px;
+}
 
-    .page-frame::after {
-      bottom: 10px;
-      left: 16px;
-    }
+/* الكتب */
+.books {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
 
-    .header-box {
-      background: linear-gradient(to bottom, #ead6aa, #c79b5b);
-      border: 4px solid #f8f1df;
-      border-radius: 18px;
-      padding: 14px;
-      margin-bottom: 22px;
-      box-shadow: inset 0 2px 8px rgba(255,255,255,0.35), 0 6px 18px rgba(0,0,0,0.25);
-    }
+/* الكتاب */
+.book {
+    width: 200px;
+    height: 300px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 8px 12px rgba(0,0,0,0.5);
+    transition: 0.3s;
+    flex-shrink: 0;
+    position: relative;
+}
 
-    .header-content {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 18px;
-      align-items: center;
-    }
+/* تأثير */
+.book:hover {
+    transform: translateY(-10px) scale(1.05);
+}
 
-    .profile-box {
-      background: rgba(255,255,255,0.18);
-      border: 3px solid #fff;
-      border-radius: 16px;
-      padding: 8px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-    }
+/* صورة */
+.book img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
 
-    .profile-box img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 12px;
-      display: block;
-    }
+/* الفاصل بين الكتب */
+.book::after {
+    content: "";
+    position: absolute;
+    right: -8px;
+    top: 0;
+    width: 8px;
+    height: 100%;
+    background: #3e2617;
+    border-radius: 2px;
+}
 
-    .title-area {
-      text-align: center;
-      color: #4c2d08;
-    }
+/* أزرار */
+.nav-btn {
+    background: #4b2e1e;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
 
-    .title-area h1 {
-      margin: 0;
-      font-size: 38px;
-      line-height: 1.5;
-      text-shadow: 1px 1px 0 rgba(255,255,255,0.45);
-    }
+.nav-btn:hover {
+    background: #6a3f28;
+}
+</style>
 
-    .title-area .sub {
-      margin-top: 8px;
-      font-size: 18px;
-      color: #6c3d08;
-      font-weight: bold;
-    }
-
-    .shelf {
-      position: relative;
-      margin: 36px 0 60px;
-      padding: 18px 72px 40px;
-      border-radius: 18px;
-      border: 4px solid #efe2c9;
-      background:
-        linear-gradient(90deg, #8f551b 0%, #b8702b 18%, #cb8841 35%, #b8702b 60%, #8f551b 100%);
-      box-shadow:
-        inset 0 0 0 2px rgba(255,255,255,0.12),
-        0 12px 24px rgba(0,0,0,0.28);
-    }
-
-    /* سطح الرف الخشبي */
-    .shelf::after {
-      content: "";
-      position: absolute;
-      right: 10px;
-      left: 10px;
-      bottom: -16px;
-      height: 18px;
-      border-radius: 0 0 14px 14px;
-      background: linear-gradient(to bottom, #7b4315, #4c260b);
-      box-shadow: 0 8px 12px rgba(0,0,0,0.25);
-    }
-
-    .shelf-title {
-      margin-bottom: 16px;
-      color: #fff8ec;
-      font-size: 25px;
-      font-weight: bold;
-      text-align: center;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-    }
-
-    .slider-wrapper {
-      position: relative;
-      overflow: hidden;
-      width: 100%;
-      padding-bottom: 8px;
-    }
-
-    .books-track {
-      display: flex;
-      gap: 24px;
-      transition: transform 0.4s ease;
-      will-change: transform;
-      align-items: flex-end;
-    }
-
-    .book {
-      flex: 0 0 auto;
-      width: 220px;
-      text-align: center;
-      position: relative;
-      padding: 0 10px;
-    }
-
-    /* الفاصل الخشبي بين الكتب */
-    .book::before,
-    .book::after {
-      content: "";
-      position: absolute;
-      bottom: -10px;
-      width: 10px;
-      height: 115px;
-      border-radius: 4px;
-      background: linear-gradient(to bottom, #8a4d16, #5a2f0d);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.25);
-    }
-
-    .book::before {
-      right: -12px;
-    }
-
-    .book::after {
-      left: -12px;
-    }
-
-    .book:hover {
-      transform: translateY(-6px);
-      transition: 0.25s ease;
-    }
-
-    .book-cover-link {
-      display: block;
-      text-decoration: none;
-    }
-
-    .book-cover {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      min-height: 320px;
-    }
-
-    .book img {
-      width: 200px;
-      height: 300px;
-      object-fit: fill;
-      border-radius: 8px;
-      border: 3px solid #f6e9d5;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.35);
-      background: #fff;
-      display: block;
-    }
-
-    .browse-btn {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 8px 16px;
-      background: #ffffff;
-      color: #145233;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
-      border: 2px solid #d8e8dd;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
-    }
-
-    .browse-btn:hover {
-      background: #eaf6ee;
-    }
-
-    .arrow-btn {
-      position: absolute;
-      top: 54%;
-      transform: translateY(-50%);
-      width: 50px;
-      height: 50px;
-      border: none;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.96);
-      color: #145233;
-      font-size: 30px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      z-index: 5;
-    }
-
-    .arrow-btn:hover {
-      background: #f3fff6;
-    }
-
-    .arrow-prev {
-      left: 10px;
-    }
-
-    .arrow-next {
-      right: 10px;
-    }
-
-    @media (max-width: 900px) {
-      .header-content {
-        grid-template-columns: 1fr;
-      }
-
-      .profile-box {
-        max-width: 280px;
-        margin: 0 auto;
-      }
-
-      .title-area h1 {
-        font-size: 28px;
-      }
-    }
-  </style>
 </head>
+
 <body>
 
-  <div class="page-frame">
+<header>📚 مكتبة مؤلفات الصرخي الحسني</header>
 
-    <div class="header-box">
-      <div class="header-content">
-        <div class="profile-box">
-          <img src="profile.jpg" alt="صورة المرجع">
-        </div>
+<!-- قسم 1 -->
+<h2>قسم العقائد</h2>
 
-        <div class="title-area">
-          <h1>مؤلفات المرجع المهندس الصرخي الحسني</h1>
-          <div class="sub">مكتبة إلكترونية للكتب والبحوث</div>
-        </div>
-      </div>
+<div class="shelf">
+    <button class="nav-btn" onclick="scrollBooks('a', -1)">⬅️</button>
+
+    <div class="books" id="books-a">
+
+        <a href="books/book1.pdf" target="_blank" class="book">
+            <img src="images/book1.jpg">
+        </a>
+
+        <a href="books/book2.pdf" target="_blank" class="book">
+            <img src="images/book2.jpg">
+        </a>
+
     </div>
 
-    <div id="library-container"></div>
-  </div>
+    <button class="nav-btn" onclick="scrollBooks('a', 1)">➡️</button>
+</div>
 
-  <script>
-    const sections = [
-      "الرسالة العملية",
-      "البحوث الأصولية",
-      "البحوث الفقهية",
-      "البحوث الفلسفية",
-      "بحوث المنطق واصول الفقه",
-      "البحوث العقدية",
-      "البحوث التاريخية",
-      "بحوث التفسير",
-      "البحوث الاخلاقية"
-    ];
+<!-- قسم 2 -->
+<h2>قسم الفقه</h2>
 
-    const booksPerSection = 10;
-    const visibleBooks = 4;
-    const container = document.getElementById("library-container");
+<div class="shelf">
+    <button class="nav-btn" onclick="scrollBooks('b', -1)">⬅️</button>
 
-    sections.forEach((sectionTitle, sectionIndex) => {
-      const shelf = document.createElement("div");
-      shelf.className = "shelf";
+    <div class="books" id="books-b">
 
-      const title = document.createElement("div");
-      title.className = "shelf-title";
-      title.textContent = sectionTitle;
+        <a href="books/book3.pdf" target="_blank" class="book">
+            <img src="images/book3.jpg">
+        </a>
 
-      const prevBtn = document.createElement("button");
-      prevBtn.className = "arrow-btn arrow-prev";
-      prevBtn.innerHTML = "‹";
+        <a href="books/book4.pdf" target="_blank" class="book">
+            <img src="images/book4.jpg">
+        </a>
 
-      const nextBtn = document.createElement("button");
-      nextBtn.className = "arrow-btn arrow-next";
-      nextBtn.innerHTML = "›";
+    </div>
 
-      const sliderWrapper = document.createElement("div");
-      sliderWrapper.className = "slider-wrapper";
+    <button class="nav-btn" onclick="scrollBooks('b', 1)">➡️</button>
+</div>
 
-      const track = document.createElement("div");
-      track.className = "books-track";
-
-      for (let i = 0; i < booksPerSection; i++) {
-        const book = document.createElement("div");
-        book.className = "book";
-
-        book.innerHTML = `
-          <a class="book-cover-link" href="book1.pdf" download>
-            <div class="book-cover">
-              <img src="book1.jpg" alt="كتاب">
-            </div>
-          </a>
-          <a href="book1.pdf" target="_blank" class="browse-btn">تصفح</a>
-        `;
-
-        track.appendChild(book);
-      }
-
-      sliderWrapper.appendChild(track);
-      shelf.appendChild(title);
-      shelf.appendChild(prevBtn);
-      shelf.appendChild(sliderWrapper);
-      shelf.appendChild(nextBtn);
-      container.appendChild(shelf);
-
-      let currentIndex = 0;
-      const step = 244; // عرض الكتاب + الفراغات والفواصل
-
-      function updateSlider() {
-        track.style.transform = `translateX(-${currentIndex * step}px)`;
-
-        prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex >= booksPerSection - visibleBooks;
-
-        prevBtn.style.opacity = prevBtn.disabled ? "0.45" : "1";
-        nextBtn.style.opacity = nextBtn.disabled ? "0.45" : "1";
-      }
-
-      nextBtn.addEventListener("click", () => {
-        if (currentIndex < booksPerSection - visibleBooks) {
-          currentIndex++;
-          updateSlider();
-        }
-      });
-
-      prevBtn.addEventListener("click", () => {
-        if (currentIndex > 0) {
-          currentIndex--;
-          updateSlider();
-        }
-      });
-
-      updateSlider();
+<script>
+function scrollBooks(id, direction) {
+    const container = document.getElementById("books-" + id);
+    container.scrollBy({
+        left: direction * 300,
+        behavior: "smooth"
     });
-  </script>
+}
+</script>
 
 </body>
 </html>
