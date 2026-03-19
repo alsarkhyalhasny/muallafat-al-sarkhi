@@ -1,112 +1,685 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>مؤلفات الصرخي الحسني</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مؤلفات الصرخي الحسني</title>
+  <style>
+    :root{
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --primary:#1e40af;
+      --primary-2:#2563eb;
+      --border:#e2e8f0;
+      --shadow:0 10px 30px rgba(15,23,42,.08);
+      --radius:18px;
+      --container:1200px;
+    }
 
-<style>
-body {
-    margin: 0;
-    font-family: Tahoma;
-    background: #f2eee9;
-    direction: rtl;
-    text-align: center;
-}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Tahoma","Segoe UI",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.7;
+    }
 
-/* العنوان */
-header {
-    background: #6b4226;
-    color: white;
-    padding: 15px;
-    font-size: 22px;
-}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(var(--container),calc(100% - 32px));margin-inline:auto}
 
-/* الرف */
-.shelf {
-    background: #8b5a2b;
-    padding: 25px;
-    margin: 25px;
-    border-radius: 8px;
-}
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--border);
+    }
 
-/* الكتب */
-.books {
-    display: flex;
-    gap: 15px;
-    overflow-x: auto;
-}
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      min-height:72px;
+    }
 
-/* الكتاب */
-.book {
-    width: 200px;
-    height: 300px;
-    background: white;
-    border-radius: 5px;
-    box-shadow: 0 6px 10px rgba(0,0,0,0.4);
-    flex-shrink: 0;
-    transition: 0.3s;
-}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:700;
+      font-size:1.15rem;
+      color:var(--primary);
+    }
 
-/* عند المرور */
-.book:hover {
-    transform: scale(1.05);
-}
+    .brand-badge{
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      color:#fff;
+      background:linear-gradient(135deg,var(--primary),var(--primary-2));
+      box-shadow:var(--shadow);
+      font-size:1.2rem;
+    }
 
-/* الصورة */
-.book img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* مهم حتى ما تنقص الصورة */
-    background: white;
-    border-radius: 5px;
-}
+    .menu{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
 
-/* الأزرار */
-.nav-btn {
-    background: #6b4226;
-    color: white;
-    border: none;
-    padding: 10px;
-    margin: 10px;
-    cursor: pointer;
-}
-</style>
+    .menu a{
+      padding:10px 14px;
+      border-radius:999px;
+      color:#334155;
+      font-size:.95rem;
+      transition:.2s ease;
+    }
 
+    .menu a:hover,
+    .menu a.active{
+      background:#eff6ff;
+      color:var(--primary);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      color:#fff;
+      background:
+        linear-gradient(rgba(15,23,42,.62),rgba(15,23,42,.75)),
+        url('images/hero.jpg') center/cover no-repeat;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at top right, rgba(37,99,235,.35), transparent 35%);
+      pointer-events:none;
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      min-height:420px;
+      display:grid;
+      align-content:center;
+      text-align:center;
+      padding:72px 0;
+    }
+
+    .hero h1{
+      margin:0 0 12px;
+      font-size:clamp(2rem,4vw,3.5rem);
+      line-height:1.2;
+    }
+
+    .hero p{
+      width:min(760px,100%);
+      margin:0 auto 24px;
+      color:#e2e8f0;
+      font-size:1.05rem;
+    }
+
+    .hero-actions{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-width:150px;
+      padding:12px 18px;
+      border-radius:14px;
+      border:1px solid transparent;
+      font-weight:700;
+      transition:.2s ease;
+      cursor:pointer;
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg,var(--primary),var(--primary-2));
+      color:#fff;
+      box-shadow:var(--shadow);
+    }
+
+    .btn-primary:hover{transform:translateY(-2px)}
+
+    .btn-light{
+      background:rgba(255,255,255,.12);
+      border-color:rgba(255,255,255,.22);
+      color:#fff;
+    }
+
+    .search-box{
+      margin-top:-36px;
+      position:relative;
+      z-index:2;
+    }
+
+    .search-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      padding:16px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .search-card input,
+    .search-card select{
+      flex:1 1 260px;
+      min-height:52px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:0 16px;
+      font-size:1rem;
+      outline:none;
+      background:#fff;
+    }
+
+    .search-card input:focus,
+    .search-card select:focus{
+      border-color:#93c5fd;
+      box-shadow:0 0 0 4px rgba(59,130,246,.12);
+    }
+
+    section{padding:56px 0}
+    .section-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:22px;
+      flex-wrap:wrap;
+    }
+
+    .section-head h2{
+      margin:0;
+      font-size:1.7rem;
+    }
+
+    .section-head p{
+      margin:6px 0 0;
+      color:var(--muted);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:18px;
+    }
+
+    .category-card,
+    .book-card,
+    .author-card,
+    .feature-card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .category-card{
+      padding:18px;
+      transition:.2s ease;
+    }
+
+    .category-card:hover{transform:translateY(-4px)}
+    .category-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+
+    .category-card h3,
+    .book-card h3,
+    .author-card h3,
+    .feature-card h3{
+      margin:0;
+      font-size:1.05rem;
+    }
+
+    .count{
+      white-space:nowrap;
+      font-size:.88rem;
+      color:var(--primary);
+      background:#eff6ff;
+      border-radius:999px;
+      padding:6px 10px;
+      font-weight:700;
+    }
+
+    .category-card p,
+    .feature-card p,
+    .author-card p,
+    .book-meta{
+      margin:0;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .books-grid{
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:18px;
+    }
+
+    .book-card{
+      overflow:hidden;
+      transition:.2s ease;
+    }
+
+    .book-card:hover{transform:translateY(-5px)}
+
+    .book-cover{
+      aspect-ratio: 3 / 4.2;
+      background:#e2e8f0;
+      overflow:hidden;
+    }
+
+    .book-cover img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .book-body{padding:14px}
+
+    .book-body h3{
+      min-height:52px;
+      margin-bottom:8px;
+      line-height:1.5;
+    }
+
+    .book-actions{
+      display:flex;
+      gap:8px;
+      margin-top:14px;
+    }
+
+    .book-actions a{
+      flex:1;
+      text-align:center;
+      padding:10px 12px;
+      border-radius:12px;
+      font-weight:700;
+      font-size:.92rem;
+    }
+
+    .read-link{background:#eff6ff;color:var(--primary)}
+    .download-link{background:var(--primary);color:#fff}
+
+    .authors-grid,
+    .features-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+    }
+
+    .author-card,
+    .feature-card{padding:20px}
+
+    .author-card .avatar{
+      width:56px;
+      height:56px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      background:#eff6ff;
+      color:var(--primary);
+      font-weight:800;
+      margin-bottom:14px;
+    }
+
+    .footer{
+      padding:28px 0 36px;
+      border-top:1px solid var(--border);
+      background:#fff;
+      color:#475569;
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr;
+      gap:24px;
+    }
+
+    .footer h4{
+      margin:0 0 10px;
+      color:var(--text);
+    }
+
+    .footer p,
+    .footer li{color:#64748b}
+    .footer ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+
+    @media (max-width:1100px){
+      .books-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+      .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
+
+    @media (max-width:860px){
+      .menu{display:none}
+      .grid,.books-grid,.authors-grid,.features-grid,.footer-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+      .hero-inner{min-height:360px}
+    }
+
+    @media (max-width:560px){
+      .container{width:min(var(--container),calc(100% - 20px))}
+      .grid,.books-grid,.authors-grid,.features-grid,.footer-grid{
+        grid-template-columns:1fr;
+      }
+      .hero p{font-size:.98rem}
+      .search-card{padding:12px}
+      .btn{width:100%}
+      .hero-actions{display:grid;grid-template-columns:1fr}
+      .topbar{position:static}
+    }
+  </style>
 </head>
-
 <body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#" class="brand">
+        <span class="brand-badge">📚</span>
+        <span>مؤلفات الصرخي الحسني</span>
+      </a>
 
-<header>📚 مكتبة مؤلفات الصرخي الحسني</header>
-
-<div class="shelf">
-
-    <button class="nav-btn" onclick="scrollBooks(-1)">⬅️</button>
-
-    <div class="books" id="books">
-
-        <a href="books/book1.pdf" target="_blank" class="book">
-            <img src="images/book1.jpg">
-        </a>
-
-        <a href="books/book2.pdf" target="_blank" class="book">
-            <img src="images/book2.jpg">
-        </a>
-
+      <nav class="menu">
+        <a href="#" class="active">الرئيسية</a>
+        <a href="#sections">أقسام المكتبة</a>
+        <a href="#authors">المؤلفون</a>
+        <a href="#featured">أشهر الكتب</a>
+        <a href="#search">البحث</a>
+      </nav>
     </div>
+  </header>
 
-    <button class="nav-btn" onclick="scrollBooks(1)">➡️</button>
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1>مؤلفات الصرخي الحسني</h1>
+      <p>
+        مكتبة إلكترونية شاملة لعرض المؤلفات والبحوث والكتب والبيانات والمحاضرات
+        بطريقة منظمة وسهلة التصفح، مع أقسام واضحة وبحث سريع وواجهة حديثة.
+      </p>
+      <div class="hero-actions">
+        <a href="#sections" class="btn btn-primary">تصفح الأقسام</a>
+        <a href="#featured" class="btn btn-light">أشهر الكتب</a>
+      </div>
+    </div>
+  </section>
 
-</div>
+  <div class="container search-box" id="search">
+    <div class="search-card">
+      <input type="text" placeholder="ابحث في المكتبة..." />
+      <select>
+        <option>كل الأقسام</option>
+        <option>العقائد</option>
+        <option>الفقه</option>
+        <option>الأصول</option>
+        <option>الردود</option>
+        <option>المحاضرات</option>
+      </select>
+      <a href="#" class="btn btn-primary">بحث</a>
+    </div>
+  </div>
 
-<script>
-function scrollBooks(direction) {
-    const container = document.getElementById("books");
-    container.scrollBy({
-        left: direction * 300,
-        behavior: "smooth"
-    });
-}
-</script>
+  <section id="sections">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>أقسام المكتبة</h2>
+          <p>قسم الكتب حسب الموضوع لتسهيل الوصول إلى المحتوى.</p>
+        </div>
+      </div>
 
+      <div class="grid">
+        <a class="category-card" href="#">
+          <div class="category-top">
+            <h3>العقائد</h3>
+            <span class="count">35 كتاب</span>
+          </div>
+          <p>كتب البحوث العقائدية والردود الفكرية.</p>
+        </a>
+
+        <a class="category-card" href="#">
+          <div class="category-top">
+            <h3>الفقه</h3>
+            <span class="count">21 كتاب</span>
+          </div>
+          <p>كتب فقهية ومسائل تطبيقية وأبحاث استدلالية.</p>
+        </a>
+
+        <a class="category-card" href="#">
+          <div class="category-top">
+            <h3>الأصول</h3>
+            <span class="count">14 كتاب</span>
+          </div>
+          <p>أبحاث أصولية وقواعد استنباطية.</p>
+        </a>
+
+        <a class="category-card" href="#">
+          <div class="category-top">
+            <h3>الردود</h3>
+            <span class="count">18 كتاب</span>
+          </div>
+          <p>ردود علمية ومنهجية على الإشكالات والشبهات.</p>
+        </a>
+
+        <a class="category-card" href="#">
+          <div class="category-top">
+            <h3>المحاضرات</h3>
+            <span class="count">42 مادة</span>
+          </div>
+          <p>محاضرات وملفات توثيقية قابلة للعرض والتحميل.</p>
+        </a>
+
+        <a class="category-card" href="#">
+          <div class="category-top">
+            <h3>البيانات والمواقف</h3>
+            <span class="count">27 ملف</span>
+          </div>
+          <p>بيانات رسمية ومواقف موثقة وأرشيف منظم.</p>
+        </a>
+
+        <a class="category-card" href="#">
+          <div class="category-top">
+            <h3>القرآن الكريم</h3>
+            <span class="count">8 مواد</span>
+          </div>
+          <p>مواد قرآنية وتفسيرية متعلقة بالمؤلفات.</p>
+        </a>
+
+        <a class="category-card" href="#">
+          <div class="category-top">
+            <h3>كتب عامة</h3>
+            <span class="count">12 كتاب</span>
+          </div>
+          <p>إصدارات متنوعة لا تندرج ضمن الأقسام الرئيسية.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="featured">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>أشهر الكتب</h2>
+          <p>واجهة مشابهة لفكرة الموقع الذي أرسلته، لكن باسمك ومحتواك.</p>
+        </div>
+      </div>
+
+      <div class="books-grid">
+        <article class="book-card">
+          <div class="book-cover"><img src="images/book1.jpg" alt="كتاب 1"></div>
+          <div class="book-body">
+            <h3>اسم الكتاب الأول</h3>
+            <p class="book-meta">قسم العقائد</p>
+            <div class="book-actions">
+              <a class="read-link" href="books/book1.pdf" target="_blank">قراءة</a>
+              <a class="download-link" href="books/book1.pdf" download>تحميل</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="book-card">
+          <div class="book-cover"><img src="images/book2.jpg" alt="كتاب 2"></div>
+          <div class="book-body">
+            <h3>اسم الكتاب الثاني</h3>
+            <p class="book-meta">قسم الفقه</p>
+            <div class="book-actions">
+              <a class="read-link" href="books/book2.pdf" target="_blank">قراءة</a>
+              <a class="download-link" href="books/book2.pdf" download>تحميل</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="book-card">
+          <div class="book-cover"><img src="images/book3.jpg" alt="كتاب 3"></div>
+          <div class="book-body">
+            <h3>اسم الكتاب الثالث</h3>
+            <p class="book-meta">قسم الأصول</p>
+            <div class="book-actions">
+              <a class="read-link" href="books/book3.pdf" target="_blank">قراءة</a>
+              <a class="download-link" href="books/book3.pdf" download>تحميل</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="book-card">
+          <div class="book-cover"><img src="images/book4.jpg" alt="كتاب 4"></div>
+          <div class="book-body">
+            <h3>اسم الكتاب الرابع</h3>
+            <p class="book-meta">قسم الردود</p>
+            <div class="book-actions">
+              <a class="read-link" href="books/book4.pdf" target="_blank">قراءة</a>
+              <a class="download-link" href="books/book4.pdf" download>تحميل</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="book-card">
+          <div class="book-cover"><img src="images/book5.jpg" alt="كتاب 5"></div>
+          <div class="book-body">
+            <h3>اسم الكتاب الخامس</h3>
+            <p class="book-meta">قسم المحاضرات</p>
+            <div class="book-actions">
+              <a class="read-link" href="books/book5.pdf" target="_blank">قراءة</a>
+              <a class="download-link" href="books/book5.pdf" download>تحميل</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="authors">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>المؤلفون</h2>
+          <p>يمكنك لاحقاً تخصيصها باسم مؤلف واحد أو أكثر.</p>
+        </div>
+      </div>
+
+      <div class="authors-grid">
+        <article class="author-card">
+          <div class="avatar">ص</div>
+          <h3>المرجع الصرخي الحسني</h3>
+          <p>البحوث والمؤلفات والردود العلمية والمنهجية.</p>
+        </article>
+
+        <article class="author-card">
+          <div class="avatar">ب</div>
+          <h3>قسم البحوث</h3>
+          <p>مواد بحثية وملفات مساعدة مرتبطة بالمؤلفات.</p>
+        </article>
+
+        <article class="author-card">
+          <div class="avatar">أ</div>
+          <h3>الأرشيف العلمي</h3>
+          <p>فهرسة المؤلفات وتحديث الإصدارات بشكل دوري.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>مزايا الموقع</h2>
+          <p>شكل قريب من alsunniah.com لكن مخصص لمكتبتك.</p>
+        </div>
+      </div>
+
+      <div class="features-grid">
+        <article class="feature-card">
+          <h3>بحث سريع</h3>
+          <p>حقل بحث واضح في أعلى الصفحة ليسهل الوصول إلى الكتب بسرعة.</p>
+        </article>
+        <article class="feature-card">
+          <h3>أقسام منظمة</h3>
+          <p>عرض الأقسام في بطاقات أنيقة مع عدد الكتب داخل كل قسم.</p>
+        </article>
+        <article class="feature-card">
+          <h3>عرض حديث للكتب</h3>
+          <p>بطاقات كتب بصورة الغلاف واسم الكتاب وأزرار القراءة والتحميل.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>نبذة عن الموقع</h4>
+        <p>
+          مكتبة إلكترونية لعرض مؤلفات الصرخي الحسني والبحوث والبيانات والمواد العلمية
+          بطريقة حديثة وسهلة التصفح.
+        </p>
+      </div>
+      <div>
+        <h4>روابط مهمة</h4>
+        <ul>
+          <li><a href="#sections">أقسام المكتبة</a></li>
+          <li><a href="#featured">أشهر الكتب</a></li>
+          <li><a href="#authors">المؤلفون</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>تواصل</h4>
+        <ul>
+          <li><a href="#">سياسة الخصوصية</a></li>
+          <li><a href="#">اتصل بنا</a></li>
+          <li><a href="#">الأسئلة الشائعة</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
