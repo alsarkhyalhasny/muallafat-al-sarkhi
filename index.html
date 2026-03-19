@@ -3,457 +3,376 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>مكتبة مؤلفات الصرخي الحسني</title>
-
+  <title>مكتبة المؤلفات</title>
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Tahoma", Arial, sans-serif;
     }
 
     body {
-      margin: 0;
-      font-family: Tahoma, Arial, sans-serif;
-      direction: rtl;
-      background: #cf9957;
-      color: #2f1b0f;
+      background: linear-gradient(to bottom, #f7f3eb, #ece2d0);
+      color: #2f2418;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* الشريط العلوي */
-    .topbar {
-      background: #774824;
+    header {
+      background: linear-gradient(135deg, #5c3b1e, #8a5a2b);
       color: #fff;
       text-align: center;
-      padding: 14px 20px;
-      font-size: 20px;
-      font-weight: bold;
+      padding: 30px 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    /* الحاوية العامة */
-    .page {
-      display: flex;
-      min-height: calc(100vh - 52px);
+    header h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
     }
 
-    /* القائمة الجانبية */
-    .sidebar {
-      width: 270px;
-      background: #ddd0c0;
-      padding: 28px 18px;
-      flex-shrink: 0;
+    header p {
+      font-size: 18px;
+      opacity: 0.95;
     }
 
-    .sidebar h2 {
-      margin: 0 0 20px;
-      font-size: 22px;
-      color: #6f4222;
+    .search-box {
+      max-width: 700px;
+      margin: 25px auto 10px;
+      padding: 0 15px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #b58a57;
+      border-radius: 14px;
+      font-size: 17px;
+      outline: none;
+      background: #fffdf9;
+    }
+
+    .search-box input:focus {
+      border-color: #7a4d22;
+      box-shadow: 0 0 8px rgba(122, 77, 34, 0.2);
+    }
+
+    .library {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px 40px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      margin-bottom: 25px;
       text-align: center;
+      color: #5a3518;
     }
 
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 22px;
     }
 
-    .sidebar li {
-      margin: 10px 0;
-      font-size: 16px;
+    .category-card {
+      background: #fffaf3;
+      border: 2px solid #d8b487;
+      border-radius: 18px;
+      padding: 25px 18px;
+      text-align: center;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+      transition: 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .category-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.14);
+      border-color: #8b5a2b;
+    }
+
+    .category-card::before {
+      content: "📚";
+      font-size: 38px;
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .category-card h3 {
+      font-size: 22px;
+      color: #4a2f16;
       line-height: 1.6;
     }
 
-    .sidebar li a {
-      display: block;
-      padding: 4px 0;
+    .category-card p {
+      margin-top: 10px;
+      font-size: 15px;
+      color: #7a6248;
     }
 
-    .sidebar li a:hover {
-      color: #8b2f1d;
+    .books-section {
+      max-width: 1200px;
+      margin: 20px auto 50px;
+      padding: 0 20px;
+      display: none;
     }
 
-    /* المحتوى */
-    .content {
-      flex: 1;
-      padding: 18px;
-      background: #d19a58;
-    }
-
-    /* الشريط الداخلي */
-    .content-header {
-      background: #9a642f;
-      border-radius: 0 0 8px 8px;
-      height: 56px;
-      margin-bottom: 24px;
-      position: relative;
-    }
-
-    .content-header::before {
-      content: "";
-      position: absolute;
-      top: 16px;
-      left: 14px;
-      width: 12px;
-      height: 22px;
-      background: linear-gradient(#eee, #bbb);
-      border-radius: 2px;
-    }
-
-    /* عنوان الكتب */
-    .section-title {
+    .books-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 18px;
-      color: #7d2f16;
-      font-weight: bold;
-      font-size: 18px;
+      gap: 10px;
+      margin-bottom: 20px;
       flex-wrap: wrap;
-      gap: 8px;
     }
 
-    .section-title .count {
-      color: #4a2d16;
-      font-weight: normal;
+    .books-header h2 {
+      font-size: 28px;
+      color: #5a3518;
     }
 
-    /* رف الكتب */
-    .shelf {
-      position: relative;
+    .back-btn {
+      background: #7a4d22;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .back-btn:hover {
+      background: #5d3918;
+    }
+
+    .books-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(160px, 1fr));
-      gap: 26px;
-      align-items: end;
-      padding: 0 16px 22px;
-      margin-bottom: 38px;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 20px;
     }
 
-    .shelf::after {
-      content: "";
-      position: absolute;
-      right: 0;
-      left: 0;
-      bottom: 0;
-      height: 10px;
-      background: linear-gradient(to bottom, #f0d8b6, #b67d42 45%, #8e582c 46%, #ddb67f);
-      border-radius: 2px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.18);
-    }
-
-    /* الكتاب */
-    .book-container {
-      position: relative;
-      z-index: 2;
-    }
-
-    .book {
-      display: block;
-      width: 100%;
-      max-width: 190px;
-      height: 280px;
-      background: #eee;
-      border-radius: 3px;
+    .book-card {
+      background: #fff;
+      border-radius: 16px;
       overflow: hidden;
-      border: 1px solid rgba(0,0,0,0.1);
-      box-shadow: 0 10px 12px rgba(0,0,0,0.16);
-      transition: transform 0.2s ease;
+      border: 1px solid #d6c1a5;
+      box-shadow: 0 5px 14px rgba(0,0,0,0.08);
+      transition: 0.3s;
     }
 
-    .book:hover {
-      transform: translateY(-4px);
+    .book-card:hover {
+      transform: translateY(-5px);
     }
 
-    .book img {
+    .book-cover {
       width: 100%;
-      height: 100%;
+      height: 260px;
       object-fit: cover;
-      display: block;
+      background: #eee3d4;
     }
 
-    /* بطاقة المعلومات */
     .book-info {
-      display: none;
-      position: absolute;
-      top: 10px;
-      right: 205px;
-      width: 260px;
-      background: #d8dfe7;
-      border: 1px solid #b8c1cb;
-      border-radius: 4px;
-      padding: 12px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.22);
-      text-align: right;
-      z-index: 10;
-    }
-
-    .book-info::after {
-      content: "";
-      position: absolute;
-      right: -14px;
-      top: 20px;
-      border-top: 10px solid transparent;
-      border-bottom: 10px solid transparent;
-      border-left: 14px solid #d8dfe7;
-    }
-
-    .book-container:hover .book-info {
-      display: block;
+      padding: 14px;
+      text-align: center;
     }
 
     .book-info h4 {
-      margin: 0 0 8px;
-      color: #8b2f1d;
       font-size: 18px;
+      margin-bottom: 8px;
+      color: #3f2814;
+      line-height: 1.6;
     }
 
-    .book-info p {
-      margin: 6px 0;
-      line-height: 1.7;
+    .book-info a {
+      display: inline-block;
+      margin-top: 8px;
+      text-decoration: none;
+      background: #8a5a2b;
+      color: #fff;
+      padding: 9px 16px;
+      border-radius: 10px;
       font-size: 15px;
     }
 
-    .stars {
-      margin-top: 8px;
-      color: #444;
-      letter-spacing: 2px;
+    .book-info a:hover {
+      background: #6f451f;
+    }
+
+    .empty-msg {
+      background: #fff8ef;
+      border: 1px dashed #c7a172;
+      padding: 25px;
+      border-radius: 14px;
+      text-align: center;
+      color: #6e5438;
       font-size: 18px;
     }
 
-    /* للشاشات الصغيرة */
-    @media (max-width: 1200px) {
-      .shelf {
-        grid-template-columns: repeat(3, minmax(160px, 1fr));
-      }
-    }
-
-    @media (max-width: 900px) {
-      .page {
-        flex-direction: column;
-      }
-
-      .sidebar {
-        width: 100%;
-      }
-
-      .shelf {
-        grid-template-columns: repeat(2, minmax(160px, 1fr));
-      }
-
-      .book-info {
-        right: auto;
-        left: 0;
-        top: 100%;
-        margin-top: 10px;
-      }
-
-      .book-info::after {
-        display: none;
-      }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #5c3b1e;
+      color: #fff;
+      margin-top: 40px;
+      font-size: 15px;
     }
 
     @media (max-width: 600px) {
-      .shelf {
-        grid-template-columns: 1fr;
+      header h1 {
+        font-size: 28px;
       }
 
-      .book {
-        max-width: 220px;
+      .category-card h3 {
+        font-size: 19px;
+      }
+
+      .books-header h2 {
+        font-size: 23px;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="topbar">مكتبة مؤلفات الصرخي الحسني</div>
+  <header>
+    <h1>مكتبة المؤلفات</h1>
+    <p>مكتبة إلكترونية خاصة بالمؤلفات والبحوث</p>
+  </header>
 
-  <div class="page">
-
-    <aside class="sidebar">
-      <h2>المؤلفات</h2>
-      <ul>
-        <li><a href="#">البحوث الفلسفية</a></li>
-        <li><a href="#">البحوث الأصولية</a></li>
-        <li><a href="#">البحوث الفقهية</a></li>
-        <li><a href="#">الرسالة العملية</a></li>
-        <li><a href="#">بحوث المنطق وأصول الفقه</a></li>
-        <li><a href="#">البحوث الأخلاقية</a></li>
-        <li><a href="#">بحوث التفسير</a></li>
-        <li><a href="#">البحوث العقائدية</a></li>
-        <li><a href="#">البحوث التاريخية</a></li>
-        <li><a href="#">المحاضرات</a></li>
-        <li><a href="#">البيانات والمواقف</a></li>
-      </ul>
-    </aside>
-
-    <main class="content">
-      <div class="content-header"></div>
-
-      <div class="section-title">
-        <div>أحدث الكتب</div>
-        <div class="count">المجموع: 114 كتاب</div>
-      </div>
-
-      <div class="shelf">
-
-        <div class="book-container">
-          <a href="books/book1.pdf" target="_blank" class="book">
-            <img src="images/book1.jpg" alt="كتاب 1">
-          </a>
-          <div class="book-info">
-            <h4>اسم الكتاب 1</h4>
-            <p>اسم المؤلف</p>
-            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
-            <div class="stars">★★★★★</div>
-          </div>
-        </div>
-
-        <div class="book-container">
-          <a href="books/book2.pdf" target="_blank" class="book">
-            <img src="images/book2.jpg" alt="كتاب 2">
-          </a>
-          <div class="book-info">
-            <h4>اسم الكتاب 2</h4>
-            <p>اسم المؤلف</p>
-            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
-            <div class="stars">★★★★★</div>
-          </div>
-        </div>
-
-        <div class="book-container">
-          <a href="books/book3.pdf" target="_blank" class="book">
-            <img src="images/book3.jpg" alt="كتاب 3">
-          </a>
-          <div class="book-info">
-            <h4>اسم الكتاب 3</h4>
-            <p>اسم المؤلف</p>
-            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
-            <div class="stars">★★★★★</div>
-          </div>
-        </div>
-
-        <div class="book-container">
-          <a href="books/book4.pdf" target="_blank" class="book">
-            <img src="images/book4.jpg" alt="كتاب 4">
-          </a>
-          <div class="book-info">
-            <h4>اسم الكتاب 4</h4>
-            <p>اسم المؤلف</p>
-            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
-            <div class="stars">★★★★★</div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="shelf">
-
-        <div class="book-container">
-          <a href="books/book5.pdf" target="_blank" class="book">
-            <img src="images/book5.jpg" alt="كتاب 5">
-          </a>
-          <div class="book-info">
-            <h4>اسم الكتاب 5</h4>
-            <p>اسم المؤلف</p>
-            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
-            <div class="stars">★★★★★</div>
-          </div>
-        </div>
-
-        <div class="book-container">
-          <a href="books/book6.pdf" target="_blank" class="book">
-            <img src="images/book6.jpg" alt="كتاب 6">
-          </a>
-          <div class="book-info">
-            <h4>اسم الكتاب 6</h4>
-            <p>اسم المؤلف</p>
-            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
-            <div class="stars">★★★★★</div>
-          </div>
-        </div>
-
-        <div class="book-container">
-          <a href="books/book7.pdf" target="_blank" class="book">
-            <img src="images/book7.jpg" alt="كتاب 7">
-          </a>
-          <div class="book-info">
-            <h4>اسم الكتاب 7</h4>
-            <p>اسم المؤلف</p>
-            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
-            <div class="stars">★★★★★</div>
-          </div>
-        </div>
-
-        <div class="book-container">
-          <a href="books/book8.pdf" target="_blank" class="book">
-            <img src="images/book8.jpg" alt="كتاب 8">
-          </a>
-          <div class="book-info">
-            <h4>اسم الكتاب 8</h4>
-            <p>اسم المؤلف</p>
-            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
-            <div class="stars">★★★★★</div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="shelf">
-
-        <div class="book-container">
-          <a href="books/book9.pdf" target="_blank" class="book">
-            <img src="images/book9.jpg" alt="كتاب 9">
-          </a>
-          <div class="book-info">
-            <h4>اسم الكتاب 9</h4>
-            <p>اسم المؤلف</p>
-            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
-            <div class="stars">★★★★★</div>
-          </div>
-        </div>
-
-        <div class="book-container">
-          <a href="books/book10.pdf" target="_blank" class="book">
-            <img src="images/book10.jpg" alt="كتاب 10">
-          </a>
-          <div class="book-info">
-            <h4>اسم الكتاب 10</h4>
-            <p>اسم المؤلف</p>
-            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
-            <div class="stars">★★★★★</div>
-          </div>
-        </div>
-
-        <div class="book-container">
-          <a href="books/book11.pdf" target="_blank" class="book">
-            <img src="images/book11.jpg" alt="كتاب 11">
-          </a>
-          <div class="book-info">
-            <h4>اسم الكتاب 11</h4>
-            <p>اسم المؤلف</p>
-            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
-            <div class="stars">★★★★★</div>
-          </div>
-        </div>
-
-        <div class="book-container">
-          <a href="books/book12.pdf" target="_blank" class="book">
-            <img src="images/book12.jpg" alt="كتاب 12">
-          </a>
-          <div class="book-info">
-            <h4>اسم الكتاب 12</h4>
-            <p>اسم المؤلف</p>
-            <p>هذا وصف مختصر للكتاب كما في موقعك السابق بدون تغيير للمعلومات الأصلية.</p>
-            <div class="stars">★★★★★</div>
-          </div>
-        </div>
-
-      </div>
-
-    </main>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="ابحث عن قسم..." onkeyup="filterCategories()" />
   </div>
+
+  <section class="library" id="librarySection">
+    <h2 class="section-title">أقسام المؤلفات</h2>
+    <div class="categories" id="categoriesContainer"></div>
+  </section>
+
+  <section class="books-section" id="booksSection">
+    <div class="books-header">
+      <button class="back-btn" onclick="goBack()">رجوع إلى الأقسام</button>
+      <h2 id="booksTitle"></h2>
+    </div>
+    <div id="booksContent"></div>
+  </section>
+
+  <footer>
+    جميع الحقوق محفوظة © مكتبة المؤلفات
+  </footer>
+
+  <script>
+    const libraryData = [
+      {
+        name: "البحوث الفلسفية",
+        description: "قسم خاص بالبحوث الفلسفية",
+        books: []
+      },
+      {
+        name: "البحوث الأصولية",
+        description: "قسم خاص بالبحوث الأصولية",
+        books: []
+      },
+      {
+        name: "البحوث الفقهية",
+        description: "قسم خاص بالبحوث الفقهية",
+        books: []
+      },
+      {
+        name: "الرسالة العملية",
+        description: "قسم خاص بالرسالة العملية",
+        books: []
+      },
+      {
+        name: "بحوث المنطق وأصول الفقه",
+        description: "قسم خاص ببحوث المنطق وأصول الفقه",
+        books: []
+      },
+      {
+        name: "البحوث الأخلاقية",
+        description: "قسم خاص بالبحوث الأخلاقية",
+        books: []
+      },
+      {
+        name: "بحوث التفسير",
+        description: "قسم خاص ببحوث التفسير",
+        books: []
+      },
+      {
+        name: "البحوث العقائدية",
+        description: "قسم خاص بالبحوث العقائدية",
+        books: []
+      },
+      {
+        name: "البحوث التاريخية",
+        description: "قسم خاص بالبحوث التاريخية",
+        books: []
+      }
+    ];
+
+    const categoriesContainer = document.getElementById("categoriesContainer");
+    const booksSection = document.getElementById("booksSection");
+    const booksTitle = document.getElementById("booksTitle");
+    const booksContent = document.getElementById("booksContent");
+    const librarySection = document.getElementById("librarySection");
+
+    function renderCategories(data) {
+      categoriesContainer.innerHTML = "";
+      data.forEach((category, index) => {
+        categoriesContainer.innerHTML += `
+          <div class="category-card" onclick="openCategory(${index})">
+            <h3>${category.name}</h3>
+            <p>${category.description}</p>
+          </div>
+        `;
+      });
+    }
+
+    function openCategory(index) {
+      const category = libraryData[index];
+      booksTitle.textContent = category.name;
+
+      if (!category.books || category.books.length === 0) {
+        booksContent.innerHTML = `
+          <div class="empty-msg">
+            لا توجد كتب مضافة حاليًا داخل هذا القسم
+          </div>
+        `;
+      } else {
+        booksContent.innerHTML = `<div class="books-grid">
+          ${category.books.map(book => `
+            <div class="book-card">
+              <img class="book-cover" src="${book.image}" alt="${book.title}">
+              <div class="book-info">
+                <h4>${book.title}</h4>
+                <a href="${book.pdf}" target="_blank">فتح الكتاب</a>
+              </div>
+            </div>
+          `).join("")}
+        </div>`;
+      }
+
+      librarySection.style.display = "none";
+      booksSection.style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function goBack() {
+      booksSection.style.display = "none";
+      librarySection.style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function filterCategories() {
+      const value = document.getElementById("searchInput").value.trim();
+      const filtered = libraryData.filter(cat => cat.name.includes(value));
+      renderCategories(filtered);
+    }
+
+    renderCategories(libraryData);
+  </script>
 
 </body>
 </html>
